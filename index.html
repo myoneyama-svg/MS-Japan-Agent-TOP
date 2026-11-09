@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MS-Japan モックビューア</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* Layout: one-screen app. Thin bar on top (name, tabs, actions); the selected site fills the rest. */
+:root{
+  --bg:#eef0f4; --bar:#ffffff; --fg:#161b26; --muted:#5d6577; --line:#d9dde6;
+  --accent:#10224f; --accent-fg:#ffffff; --tab-hover:#f2f4f8; --stage:#e3e6ed;
+  --font:'Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12151c; --bar:#1a1e27; --fg:#e8ebf2; --muted:#9aa2b4; --line:#2c3240;
+  --accent:#8fa8e8; --accent-fg:#0e1322; --tab-hover:#232835; --stage:#0d1016; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151c; --bar:#1a1e27; --fg:#e8ebf2; --muted:#9aa2b4; --line:#2c3240;
+  --accent:#8fa8e8; --accent-fg:#0e1322; --tab-hover:#232835; --stage:#0d1016; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);display:flex;flex-direction:column;overflow:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+
+.bar{background:var(--bar);border-bottom:1px solid var(--line);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:20px;min-height:52px;flex-wrap:wrap}
+.brand{font-size:13px;font-weight:900;letter-spacing:.04em;white-space:nowrap;padding-block:10px}
+.brand small{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+
+.tabs{display:flex;gap:2px;overflow-x:auto;flex:1 1 320px;min-width:0;align-self:stretch;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:13px;font-weight:700;
+  padding:0 14px;white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent;border-top:3px solid transparent;min-height:48px}
+.tab:hover{background:var(--tab-hover);color:var(--fg)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:focus-visible,.btn:focus-visible,.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.actions{display:flex;align-items:center;gap:10px;padding-block:8px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:12px;font-weight:700;padding:7px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;
+  color:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:7px 12px}
+.btn:hover{background:var(--accent);color:var(--accent-fg)}
+.btn svg{width:12px;height:12px}
+
+.stage{flex:1;min-height:0;background:var(--stage);display:flex;justify-content:center;overflow:auto}
+.stage iframe{border:0;width:100%;height:100%;background:#fff;display:block}
+.stage.sp{padding-block:16px}
+.stage.sp iframe{width:390px;max-width:100%;border-radius:14px;box-shadow:0 0 0 1px var(--line),0 12px 32px rgba(0,0,0,.18)}
+
+.fallback{align-self:center;max-width:440px;margin:24px;padding:28px;background:var(--bar);border:1px solid var(--line);border-radius:12px;text-align:center}
+.fallback h2{font-size:16px;margin:0 0 8px;text-wrap:balance}
+.fallback p{font-size:13px;color:var(--muted);line-height:1.8;margin:0 0 18px}
+
+@media (max-width:640px){
+  .bar{gap:0 12px}
+  .tabs{order:3;flex-basis:100%;margin-inline:-16px;padding-inline:8px;border-top:1px solid var(--line)}
+  .actions{margin-left:auto}
+  .seg{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="brand">MS-Japan<small>デザイン案 ビューア</small></div>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="サイト"></nav>
+  <div class="actions">
+    <div class="seg" role="group" aria-label="表示幅">
+      <button type="button" id="w-pc" aria-pressed="true">PC</button>
+      <button type="button" id="w-sp" aria-pressed="false">スマホ</button>
+    </div>
+    <a class="btn" id="open" href="#" target="_blank" rel="noopener">別タブで開く
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 2H2v8h8V7M7 2h3v3M10 2 5.5 6.5"/></svg></a>
+  </div>
+</header>
+<main class="stage" id="stage" role="tabpanel"></main>
+
+<script>
+(function(){
+  var tabs = document.getElementById("tabs"), stage = document.getElementById("stage"), open = document.getElementById("open");
+  var pc = document.getElementById("w-pc"), sp = document.getElementById("w-sp");
+  var sites = [], current = -1;
+
+  function idOf(s, i){ return "site-" + (i + 1); }
+  function store(k, v){ try{ v === undefined ? (v = localStorage.getItem(k)) : localStorage.setItem(k, v); }catch(e){ v = null; } return v; }
+
+  function setWidth(mode){
+    stage.classList.toggle("sp", mode === "sp");
+    pc.setAttribute("aria-pressed", mode !== "sp"); sp.setAttribute("aria-pressed", mode === "sp");
+    store("viewer-width", mode);
+  }
+  pc.onclick = function(){ setWidth("pc"); };
+  sp.onclick = function(){ setWidth("sp"); };
+
+  function show(i){
+    if (i < 0 || i >= sites.length) i = 0;
+    var s = sites[i]; current = i;
+    Array.prototype.forEach.call(tabs.children, function(b, j){ b.setAttribute("aria-selected", j === i); b.tabIndex = j === i ? 0 : -1; });
+    tabs.children[i].scrollIntoView({block:"nearest", inline:"nearest"});
+    open.href = s.url;
+    stage.innerHTML = "";
+    if (s.embed !== false){
+      var f = document.createElement("iframe");
+      f.src = s.url;
+      f.title = s.name;
+      stage.appendChild(f);
+    } else {
+      var d = document.createElement("div");
+      d.className = "fallback";
+      d.innerHTML = "<h2></h2><p>このサイトは埋め込み表示をしない設定です。別タブで開いて確認してください。</p>";
+      d.querySelector("h2").textContent = s.name;
+      var a = open.cloneNode(true); a.removeAttribute("id"); d.appendChild(a);
+      stage.appendChild(d);
+    }
+    if (location.hash !== "#" + idOf(s, i)) history.replaceState(null, "", "#" + idOf(s, i));
+    document.title = s.name + " | MS-Japan モックビューア";
+  }
+
+  function fromHash(){
+    var m = /^#site-(\d+)$/.exec(location.hash);
+    return m ? +m[1] - 1 : 0;
+  }
+
+  tabs.addEventListener("keydown", function(e){
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    var n = (current + (e.key === "ArrowRight" ? 1 : -1) + sites.length) % sites.length;
+    show(n); tabs.children[n].focus();
+  });
+  window.addEventListener("hashchange", function(){ var i = fromHash(); if (i !== current) show(i); });
+
+  fetch("sites.json", {cache:"no-cache"}).then(function(r){ return r.json(); }).then(function(list){
+    sites = list.filter(function(s){ return s && s.name && s.url; });
+    sites.forEach(function(s, i){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "tab"; b.role = "tab"; b.textContent = s.name;
+      b.onclick = function(){ show(i); };
+      tabs.appendChild(b);
+    });
+    setWidth(store("viewer-width") === "sp" ? "sp" : "pc");
+    show(fromHash());
+  }).catch(function(){
+    stage.innerHTML = '<div class="fallback"><h2>サイト一覧を読み込めませんでした</h2><p>ページを再読み込みしてください。</p></div>';
+  });
+})();
+</script>
+</body>
+</html>
