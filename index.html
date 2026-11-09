@@ -99,16 +99,24 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   pc.onclick = function(){ setWidth("pc"); };
   sp.onclick = function(){ setWidth("sp"); };
 
+  // ブラウザのキャッシュで古い版が出ないよう、同じサイト内のURLには読み込みごとの印を付ける
+  var loadStamp = Date.now();
+  function fresh(u){
+    if (/^[a-z]+:\/\//i.test(u)) return u;
+    return u + (u.indexOf("?") < 0 ? "?" : "&") + "v=" + loadStamp;
+  }
+
   function show(i){
     if (i < 0 || i >= sites.length) i = 0;
     var s = sites[i]; current = i;
     Array.prototype.forEach.call(tabs.children, function(b, j){ b.setAttribute("aria-selected", j === i); b.tabIndex = j === i ? 0 : -1; });
     tabs.children[i].scrollIntoView({block:"nearest", inline:"nearest"});
-    open.href = s.url;
+    var url = fresh(s.url);
+    open.href = url;
     stage.innerHTML = "";
     if (s.embed !== false){
       var f = document.createElement("iframe");
-      f.src = s.url;
+      f.src = url;
       f.title = s.name;
       stage.appendChild(f);
     } else {
