@@ -9,181 +9,195 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&text=0123456789%2C.%25%2B-%C2%A5&display=swap" rel="stylesheet">
-<style>@font-face{font-family:"NumFutura";src:local("Futura Medium"),local("Futura-Medium"),local("Futura PT Medium"),local("FuturaPT-Medium");font-weight:100 600;unicode-range:U+0025,U+002B-002E,U+0030-0039,U+00A5}
+<style>
+@font-face{font-family:"NumFutura";src:local("Futura Medium"),local("Futura-Medium"),local("Futura PT Medium"),local("FuturaPT-Medium");font-weight:100 600;unicode-range:U+0025,U+002B-002E,U+0030-0039,U+00A5}
 @font-face{font-family:"NumFutura";src:local("Futura Bold"),local("Futura-Bold"),local("Futura PT Bold"),local("FuturaPT-Bold");font-weight:700 900;unicode-range:U+0025,U+002B-002E,U+0030-0039,U+00A5}
-
 :root{
-  --navy-900:#0B1A3E;--navy-800:#10224F;--navy-700:#0E1A36;
-  --gold-500:#C9AE74;--gold-600:#B08F52;--gold-700:#8C6D33;
+  --navy-900:#0B1A3E;--navy-800:#10224F;--gold-500:#C9AE74;--gold-600:#B08F52;--gold-700:#8C6D33;
   --cream-50:#FAF8F4;--cream-100:#F4F1EA;--cream-200:#F7F5F0;--cream-300:#EFEAE0;
-  --line:#E3DED3;--line-soft:#EFEAE0;
-  --text:#0E1A36;--text-sub:#4A5368;--text-mute:#98A3B3;
-  --white:#fff;--error:#B3261E;--error-bg:#FBEDEC;--ok:#2E7D5B;
+  --line:#E3DED3;--line-soft:#EFEAE0;--text:#0E1A36;--text-sub:#4A5368;--text-mute:#98A3B3;--white:#fff;
+  --error:#B3261E;--error-bg:#FBEDEC;--ok:#2E7D5B;
   --font-jp:'游ゴシック体',YuGothic,'游ゴシック Medium','Yu Gothic Medium','游ゴシック','Yu Gothic','Noto Sans JP',sans-serif;
   --font-en:Montserrat,sans-serif;--font-num:"NumFutura",Jost,'Cormorant Garamond',serif;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:16px}
 body{margin:0;background:var(--cream-100);color:var(--text);font-family:var(--font-jp);font-weight:500;letter-spacing:.04em;line-height:1.7}
 a{color:inherit}
 button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit}
+[hidden]{display:none !important}
 
-/* header */
 .hdr{background:var(--white);border-bottom:1px solid var(--line)}
-.hdr-in{max-width:1120px;margin:0 auto;height:64px;padding:0 24px;display:flex;align-items:center;gap:16px}
+.hdr-in{max-width:1180px;margin:0 auto;height:64px;padding:0 24px;display:flex;align-items:center;gap:16px}
 .hdr img{height:24px;width:auto;display:block}
 .hdr .sp{flex:1}
 .hdr .back{font-size:13px;color:var(--text-sub);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.hdr .back:hover{color:var(--navy-800)}
 
-/* steps */
 .steps{background:var(--white);border-bottom:1px solid var(--line)}
 .steps ol{list-style:none;margin:0 auto;padding:18px 24px;max-width:560px;display:flex;justify-content:space-between;position:relative}
 .steps ol::before{content:"";position:absolute;left:calc(24px + 16%);right:calc(24px + 16%);top:33px;height:2px;background:var(--line)}
 .steps li{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--text-mute)}
-.steps .dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--white);border:2px solid var(--line);font-family:var(--font-en);font-size:13px;color:var(--text-mute)}
+.steps .dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--white);border:2px solid var(--line);font-family:var(--font-num);font-size:14px;color:var(--text-mute)}
 .steps li.on{color:var(--navy-800)}
 .steps li.on .dot{background:var(--navy-800);border-color:var(--navy-800);color:var(--white);box-shadow:0 0 0 4px rgba(16,34,79,.12)}
-.steps li.done .dot{background:var(--gold-500);border-color:var(--gold-500);color:var(--navy-900)}
 .steps li.done{color:var(--gold-700)}
+.steps li.done .dot{background:var(--gold-500);border-color:var(--gold-500);color:var(--navy-900)}
 
-/* layout */
-.page{max-width:1120px;margin:0 auto;padding:40px 24px 120px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:32px;align-items:start}
-.lead{grid-column:1/-1;display:flex;flex-direction:column;gap:6px}
-.eyebrow{font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.24em;color:var(--gold-700)}
-.lead h1{margin:0;font-size:26px;letter-spacing:.08em;color:var(--navy-800);line-height:1.5}
+/* applying job banner */
+.jobbar{background:var(--navy-800);color:var(--white)}
+.jobbar-in{max-width:1180px;margin:0 auto;padding:18px 24px;display:flex;flex-direction:column;gap:6px}
+.jobbar .k{display:flex;align-items:center;gap:10px;font-size:12px;color:#C7CEDB}
+.jobbar .k b{padding:1px 8px;background:var(--gold-500);color:var(--navy-900);font-size:11px}
+.jobbar h1{margin:0;font-size:19px;line-height:1.6;letter-spacing:.04em}
+.jobbar .m{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px;color:#D9DDE6}
+.jobbar .m .num{font-family:var(--font-num);font-size:16px;color:var(--white)}
+
+.page{max-width:1180px;margin:0 auto;padding:28px 24px 120px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;align-items:start}
+.lead{grid-column:1/-1;display:flex;flex-direction:column;gap:4px}
+.lead h2{margin:0;font-size:22px;letter-spacing:.08em;color:var(--navy-800)}
 .lead p{margin:0;font-size:14px;color:var(--text-sub)}
-.lead .meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:6px;font-size:13px;color:var(--text-sub)}
-.lead .meta span{display:inline-flex;align-items:center;gap:6px}
 
-/* job summary */
-.side{position:sticky;top:20px;display:flex;flex-direction:column;gap:16px}
-.job{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--navy-800)}
-.job-h{padding:12px 18px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--white);background:var(--navy-800);display:flex;align-items:center;gap:8px}
-.job-b{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
-.tags{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.tag{padding:1px 8px;font-size:11px;font-weight:700;background:var(--navy-800);color:var(--white)}
-.tag.pub{background:var(--white);color:var(--navy-800);border:1px solid var(--navy-800)}
-.no{font-family:var(--font-num);font-size:13px;color:var(--text-mute);letter-spacing:.08em}
-.job-t{margin:0;font-size:14px;font-weight:700;line-height:1.7}
-.job-f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--text-sub)}
-.job-f b{font-size:11px;color:var(--gold-700);margin-right:8px}
-.job-f .num{font-family:var(--font-num);font-size:18px;font-weight:600;color:var(--navy-800)}
-.job-note{margin:0;padding:10px 12px;background:var(--cream-200);font-size:12px;line-height:1.7;color:var(--text-sub)}
-.flow{background:var(--white);border:1px solid var(--line);padding:16px 18px}
-.flow h2{margin:0 0 10px;font-size:13px;letter-spacing:.1em;color:var(--navy-800)}
-.flow ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:12px;color:var(--text-sub)}
-.flow li{display:grid;grid-template-columns:22px 1fr;gap:8px;line-height:1.6}
-.flow li i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--cream-300);color:var(--navy-800);font-family:var(--font-en);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
-.flow li b{display:block;color:var(--text);font-size:13px}
+/* section nav */
+.snav{position:sticky;top:16px;background:var(--white);border:1px solid var(--line);padding:8px 0}
+.snav h3{margin:0;padding:10px 18px 8px;font-size:12px;letter-spacing:.12em;color:var(--text-mute)}
+.snav a{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:10px;padding:10px 18px;text-decoration:none;font-size:13px;font-weight:700;color:var(--text-sub);border-left:3px solid transparent}
+.snav a:hover{background:var(--cream-50)}
+.snav a.cur{color:var(--navy-800);border-left-color:var(--gold-500);background:var(--cream-50)}
+.snav i{font-style:normal;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-size:12px;background:var(--cream-300);color:var(--navy-800)}
+.snav a.ok i{background:var(--ok);color:#fff;font-size:0}
+.snav a.ok i::after{content:"✓";font-size:12px}
+.snav small{font-size:11px;font-weight:700;color:var(--text-mute)}
+.snav a.ok small{color:var(--ok)}
 
-/* form */
 .main{min-width:0;display:flex;flex-direction:column;gap:24px}
 .card{background:var(--white);border:1px solid var(--line)}
 .card-h{display:flex;align-items:center;gap:12px;padding:16px 28px;border-bottom:1px solid var(--line-soft)}
-.card-h .n{font-family:var(--font-num);font-size:26px;line-height:1;color:var(--gold-600)}
+.card-h .n{font-family:var(--font-num);font-size:22px;line-height:1;color:var(--gold-600)}
 .card-h h2{margin:0;font-size:17px;letter-spacing:.1em;color:var(--navy-800)}
 .card-h .sub{margin-left:auto;font-size:12px;color:var(--text-mute)}
-.card-b{padding:8px 28px 24px}
-.field{padding:18px 0;border-bottom:1px solid var(--line-soft);display:flex;flex-direction:column;gap:10px}
+.card-h .tog{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:1px solid var(--line);background:var(--white);font-size:12px;font-weight:700;color:var(--navy-800);cursor:pointer}
+.card-b{padding:6px 28px 24px}
+.grp{margin:18px 0 0;padding:14px 0 0;border-top:2px solid var(--navy-800);font-size:14px;font-weight:700;color:var(--navy-800);display:flex;align-items:center;gap:10px}
+.grp:first-child{margin-top:6px}
+.grp .rm{margin-left:auto;font-size:12px;color:var(--text-mute);background:none;border:0;cursor:pointer;text-decoration:underline}
+.field{padding:16px 0;border-bottom:1px solid var(--line-soft);display:grid;grid-template-columns:190px minmax(0,1fr);gap:8px 20px;align-items:start}
 .field:last-child{border-bottom:0}
-.lbl{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--navy-800)}
+.lbl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:14px;font-weight:700;color:var(--navy-800);padding-top:12px}
 .req,.opt{flex:none;padding:0 6px;font-size:11px;line-height:20px;font-weight:700;letter-spacing:.06em}
 .req{background:var(--gold-500);color:var(--navy-900)}
 .opt{background:var(--cream-300);color:var(--text-sub)}
-.lbl .ok{margin-left:auto;display:none;align-items:center;gap:4px;font-size:12px;color:var(--ok);font-weight:700}
-.field.valid .lbl .ok{display:inline-flex}
-.hint{margin:-4px 0 0;font-size:12px;color:var(--text-mute)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.in{position:relative;display:flex;flex-direction:column;gap:4px}
+.ctl{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field.chipf .lbl{padding-top:10px}
+.hint{margin:0;font-size:12px;color:var(--text-mute)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.row>span{font-size:13px;color:var(--text-sub)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.in{display:flex;flex-direction:column;gap:4px}
 .in small{font-size:11px;color:var(--text-mute)}
-input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;height:52px;padding:0 16px;font-size:16px;background:var(--cream-50);border:1px solid var(--line);border-radius:0;outline:none;transition:border-color .15s,box-shadow .15s,background .15s;-webkit-appearance:none;appearance:none}
-textarea{height:auto;min-height:120px;padding:14px 16px;line-height:1.7;resize:vertical}
-select{padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B08F52' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
-select:invalid{color:var(--text-mute)}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{width:100%;height:48px;padding:0 14px;font-size:16px;background:var(--cream-50);border:1px solid var(--line);border-radius:0;outline:none;transition:border-color .15s,box-shadow .15s,background .15s;-webkit-appearance:none;appearance:none}
+input[type=number]{-moz-appearance:textfield}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+textarea{height:auto;min-height:96px;padding:12px 14px;line-height:1.7;resize:vertical}
+select{padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B08F52' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+select.s{width:auto;min-width:96px}
+.w-num{width:120px !important}
 ::placeholder{color:#B7BEC9}
 input:focus,select:focus,textarea:focus{background:var(--white);border-color:var(--navy-800);box-shadow:0 0 0 3px rgba(16,34,79,.12)}
-.field.err input,.field.err select{border-color:var(--error);background:var(--error-bg)}
-.msg{display:none;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--error)}
-.field.err .msg{display:flex}
+.field.err input:not([type=checkbox]):not([type=radio]),.field.err select{border-color:var(--error);background:var(--error-bg)}
+.msg{display:none;font-size:12px;font-weight:700;color:var(--error)}
+.field.err .msg{display:block}
+.okm{display:none;font-size:11px;color:var(--ok);font-weight:700}
+.field.valid .okm{display:inline}
 
-/* chips */
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.chip span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;font-size:14px;background:var(--white);border:1px solid var(--line);cursor:pointer;transition:all .15s;user-select:none}
-.chip span::before{content:"";width:14px;height:14px;border:1px solid #C7C0B0;border-radius:50%;flex:none;transition:all .15s}
+.chip span{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;font-size:14px;background:var(--white);border:1px solid var(--line);cursor:pointer;transition:all .15s;user-select:none}
+.chip span::before{content:"";width:14px;height:14px;border:1px solid #C7C0B0;border-radius:50%;flex:none}
 .chip input[type=checkbox]+span::before{border-radius:0}
 .chip input:checked+span{border-color:var(--navy-800);background:var(--navy-800);color:var(--white)}
 .chip input:checked+span::before{border-color:var(--gold-500);background:var(--gold-500);box-shadow:inset 0 0 0 3px var(--navy-800)}
 .chip input:focus-visible+span{box-shadow:0 0 0 3px rgba(16,34,79,.2)}
 .chip:hover span{border-color:var(--navy-800)}
+.chips.sm .chip span{min-height:36px;padding:0 12px;font-size:13px}
 
-/* consent + actions */
-.agree{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 0;text-align:center}
+.addbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border:1px dashed var(--gold-600);background:var(--white);color:var(--gold-700);font-size:13px;font-weight:700;cursor:pointer}
+.addbtn:hover{background:var(--cream-50)}
+
+.regions{display:flex;flex-direction:column;border:1px solid var(--line-soft)}
+.region{border-top:1px solid var(--line-soft)}
+.region:first-child{border-top:0}
+.region-h{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream-50)}
+.region-h label{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;cursor:pointer}
+.region-h input{width:18px;height:18px;accent-color:var(--navy-800)}
+.region-h .cnt{font-size:12px;color:var(--gold-700)}
+.region-h button{margin-left:auto;background:none;border:0;font-size:12px;color:var(--text-sub);cursor:pointer;display:flex;align-items:center;gap:4px}
+.region-b{padding:10px 12px}
+.tasks{border:1px solid var(--line-soft);background:var(--cream-50);padding:12px}
+
+.agree{display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0 0;text-align:center}
 .agree label{display:inline-flex;align-items:center;gap:10px;font-size:14px;cursor:pointer}
 .agree input{width:20px;height:20px;accent-color:var(--navy-800)}
 .agree p{margin:0;font-size:12px;color:var(--text-mute)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:320px;height:60px;padding:0 32px;border:0;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:filter .15s,opacity .15s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:300px;height:56px;padding:0 32px;border:0;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:filter .15s,opacity .15s}
 .btn-gold{background:var(--gold-500);color:var(--navy-900)}
 .btn-navy{background:var(--navy-800);color:var(--white);border-bottom:2px solid var(--gold-500)}
 .btn-line{background:var(--white);color:var(--navy-800);border:1px solid var(--navy-800)}
 .btn:hover{filter:brightness(1.05)}
 .btn[aria-disabled=true]{opacity:.45;cursor:not-allowed}
-.btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 
-/* bottom bar */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(11,26,62,.06)}
-.bar-in{max-width:1120px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px}
+.bar-in{max-width:1180px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px}
 .prog{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
 .prog-t{font-size:13px;color:var(--text-sub)}
-.prog-t b{font-family:var(--font-num);font-size:20px;color:var(--navy-800);margin:0 2px}
+.prog-t b{font-family:var(--font-num);font-size:19px;color:var(--navy-800);margin:0 2px}
 .prog-bar{height:4px;background:var(--cream-300)}
 .prog-bar i{display:block;height:100%;width:0;background:var(--gold-500);transition:width .25s}
-.bar .btn{min-width:280px;height:52px}
+.bar .btn{min-width:260px;height:50px}
 
-/* confirm */
-.cf dl{margin:0;display:grid;grid-template-columns:180px 1fr}
-.cf dt,.cf dd{margin:0;padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.cf dl{margin:0;display:grid;grid-template-columns:190px 1fr}
+.cf dt,.cf dd{margin:0;padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
 .cf dt{font-weight:700;color:var(--navy-800)}
 .cf dd{white-space:pre-wrap;overflow-wrap:anywhere}
+.cf dt.g{grid-column:1/-1;padding-top:16px;color:var(--gold-700);font-size:13px;border-bottom:0}
 .cf dd.none{color:var(--text-mute)}
 .edit{margin-left:auto;font-size:12px;font-weight:700;color:var(--gold-700);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:4px}
 
-/* done */
 .done{background:var(--white);border:1px solid var(--line);padding:48px 40px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .done .ic{width:64px;height:64px;border-radius:50%;background:var(--navy-800);display:flex;align-items:center;justify-content:center}
 .done h2{margin:0;font-size:22px;letter-spacing:.08em;color:var(--navy-800)}
 .done p{margin:0;font-size:14px;color:var(--text-sub);line-height:1.9}
-.done .flow{width:100%;max-width:520px;text-align:left;margin-top:8px}
-
-[hidden]{display:none !important}
+.done ol{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;text-align:left;max-width:480px;width:100%;font-size:13px;color:var(--text-sub)}
+.done li{display:grid;grid-template-columns:24px 1fr;gap:10px}
+.done li i{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--cream-300);color:var(--navy-800);font-family:var(--font-num);display:flex;align-items:center;justify-content:center}
+.done li b{display:block;color:var(--text);font-size:14px}
 .demo{grid-column:1/-1;margin:0;font-size:11px;color:var(--text-mute);text-align:center}
 
 @media (max-width:960px){
-  .page{grid-template-columns:1fr;padding:24px 16px 120px;gap:20px}
-  .side{position:static;order:-1}
-  .lead{order:-2}
-  .flow.side-flow{display:none}
+  .page{grid-template-columns:1fr;padding:20px 16px 120px;gap:18px}
+  .snav{display:none}
+  .field{grid-template-columns:1fr;gap:8px}
+  .lbl{padding-top:0}
+  .field.chipf .lbl{padding-top:0}
+  .cf dl{grid-template-columns:1fr}
+  .cf dt{border-bottom:0;padding-bottom:0}
+  .cf dd{padding-top:4px}
 }
 @media (max-width:600px){
   .hdr-in{padding:0 16px;height:56px}
   .hdr img{height:20px}
+  .pc-only{display:none}
   .steps ol{padding:14px 16px}
   .steps ol::before{top:29px}
-  .lead h1{font-size:21px}
+  .jobbar-in{padding:14px 16px}
+  .jobbar h1{font-size:16px}
   .card-h{padding:14px 18px}
+  .card-h .sub{display:none}
   .card-b{padding:4px 18px 18px}
-  .row2{gap:8px}
-  .sel2{grid-template-columns:1fr}
-  .card-h .sub,.pc-only{display:none}
-  .chip span{padding:0 14px}
-  .cf dl{grid-template-columns:1fr}
-  .cf dt{border-bottom:0;padding-bottom:0}
-  .cf dd{padding-top:4px}
+  .chip span{padding:0 12px}
   .btn{min-width:0;width:100%}
   .bar-in{padding:10px 16px;gap:12px}
-  .bar .btn{min-width:0;width:auto;flex:none;padding:0 18px;height:48px;font-size:14px;letter-spacing:.06em}
+  .bar .btn{min-width:0;width:auto;flex:none;padding:0 16px;height:48px;font-size:14px;letter-spacing:.06em}
   .done{padding:36px 20px}
 }
 </style>
@@ -201,196 +215,288 @@ input:focus,select:focus,textarea:focus{background:var(--white);border-color:var
   <li id="st3"><span class="dot">3</span>完了</li>
 </ol></nav>
 
+<div class="jobbar"><div class="jobbar-in">
+  <span class="k">今回ご相談する求人<b id="jKind">社名非公開求人</b><span>No. <span id="jNo">240078</span></span></span>
+  <h1 id="jTitle">京都市内・駅近・業績安定の上場不動産管理会社での経理スタッフ求人！！</h1>
+  <span class="m"><span>想定年収 <span class="num" id="jSal">600万円 ～ 900万円</span></span><span>勤務地 <span id="jLoc">京都府</span></span></span>
+</div></div>
+
 <div class="page">
   <div class="lead" id="lead">
-    <span class="eyebrow">CONSULTATION</span>
-    <h1>この求人について相談する</h1>
-    <p>キャリアアドバイザーが、求人の詳しい内容や企業名をご案内します。ご相談は無料です。</p>
-    <div class="meta">
-      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B08F52" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>入力は約1分</span>
-      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B08F52" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>ご入力内容は、ご紹介のためだけに使います</span>
-    </div>
+    <h2 id="leadH">ご経歴とご希望を入力してください</h2>
+    <p id="leadP">アドバイザーが、ご経歴にあった求人や企業名をご案内します。任意の項目は、あとからでも大丈夫です。</p>
   </div>
 
+  <nav class="snav" id="snav" aria-label="入力の進み具合">
+    <h3>入力の進み具合</h3>
+    <a href="#sec1" data-sec="sec1"><i>1</i>会員情報<small></small></a>
+    <a href="#sec2" data-sec="sec2"><i>2</i>学歴<small></small></a>
+    <a href="#sec3" data-sec="sec3"><i>3</i>現状・職務経歴<small></small></a>
+    <a href="#sec4" data-sec="sec4"><i>4</i>資格・スキル<small></small></a>
+    <a href="#sec5" data-sec="sec5"><i>5</i>希望転職条件<small></small></a>
+  </nav>
+
   <main class="main">
-    <!-- STEP 1: input -->
-    <form id="form" novalidate autocomplete="on">
-      <div style="display:flex;flex-direction:column;gap:24px">
-      <section class="card" id="sec1">
-        <div class="card-h"><span class="n">01</span><h2>お名前とご連絡先</h2><span class="sub">ご連絡にのみ使います</span></div>
-        <div class="card-b">
-          <div class="field" data-req="name">
-            <div class="lbl">お名前<span class="req">必須</span><span class="ok">✓ 入力済み</span></div>
-            <div class="row2">
-              <label class="in"><small>姓</small><input type="text" name="sei" autocomplete="family-name" placeholder="例）山田"></label>
-              <label class="in"><small>名</small><input type="text" name="mei" autocomplete="given-name" placeholder="例）太郎"></label>
-            </div>
-            <div class="msg">姓と名を入力してください</div>
-          </div>
-          <div class="field" data-req="kana">
-            <div class="lbl">フリガナ<span class="req">必須</span><span class="ok">✓ 入力済み</span></div>
-            <div class="row2">
-              <label class="in"><small>セイ</small><input type="text" name="seiK" placeholder="例）ヤマダ"></label>
-              <label class="in"><small>メイ</small><input type="text" name="meiK" placeholder="例）タロウ"></label>
-            </div>
-            <p class="hint">ひらがなで入力しても、カタカナに直します</p>
-            <div class="msg">カタカナで入力してください</div>
-          </div>
-          <div class="field" data-req="email">
-            <label class="lbl" for="email">メールアドレス<span class="req">必須</span><span class="ok">✓ 入力済み</span></label>
-            <input id="email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="例）taro.yamada@example.com">
-            <div class="msg">メールアドレスの形をご確認ください</div>
-          </div>
-          <div class="field" data-req="tel">
-            <label class="lbl" for="tel">電話番号<span class="req">必須</span><span class="ok">✓ 入力済み</span></label>
-            <input id="tel" type="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="例）09012345678">
-            <p class="hint">ハイフンはあってもなくても大丈夫です。日中つながりやすい番号をご入力ください</p>
-            <div class="msg">10桁か11桁の番号を入力してください</div>
-          </div>
-          <div class="field" data-req="birth">
-            <div class="lbl">生まれ年とお住まい<span class="req">必須</span><span class="ok">✓ 入力済み</span></div>
-            <div class="row2 sel2">
-              <label class="in"><small>生まれ年</small><select name="birth" required><option value="" disabled selected>選択してください</option></select></label>
-              <label class="in"><small>お住まいの都道府県</small><select name="pref" required autocomplete="address-level1"><option value="" disabled selected>選択してください</option></select></label>
-            </div>
-            <div class="msg">生まれ年とお住まいを選んでください</div>
-          </div>
+  <form id="form" novalidate autocomplete="on"><div style="display:flex;flex-direction:column;gap:24px">
+
+    <!-- 1 会員情報 -->
+    <section class="card" id="sec1" data-title="会員情報">
+      <div class="card-h"><span class="n">01</span><h2>会員情報</h2><span class="sub">ご連絡にのみ使います</span></div>
+      <div class="card-b">
+        <div class="field" data-req="name" data-label="お名前">
+          <div class="lbl">お名前<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><div class="row2">
+            <label class="in"><small>姓</small><input type="text" name="sei" autocomplete="family-name" placeholder="例）山田"></label>
+            <label class="in"><small>名</small><input type="text" name="mei" autocomplete="given-name" placeholder="例）太郎"></label>
+          </div><div class="msg">姓と名を入力してください</div></div>
         </div>
-      </section>
-
-      <section class="card" id="sec2">
-        <div class="card-h"><span class="n">02</span><h2>今のご状況</h2><span class="sub">選ぶだけで入力できます</span></div>
-        <div class="card-b">
-          <div class="field" data-req="status">
-            <div class="lbl">今の就業状況<span class="req">必須</span><span class="ok">✓ 選択済み</span></div>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="status" value="在職中"><span>在職中</span></label>
-              <label class="chip"><input type="radio" name="status" value="離職中"><span>離職中</span></label>
-              <label class="chip"><input type="radio" name="status" value="在学中"><span>在学中</span></label>
-            </div>
-            <div class="msg">1つ選んでください</div>
-          </div>
-          <div class="field" data-req="timing">
-            <div class="lbl">転職を考えている時期<span class="req">必須</span><span class="ok">✓ 選択済み</span></div>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="timing" value="すぐにでも"><span>すぐにでも</span></label>
-              <label class="chip"><input type="radio" name="timing" value="3か月以内"><span>3か月以内</span></label>
-              <label class="chip"><input type="radio" name="timing" value="半年以内"><span>半年以内</span></label>
-              <label class="chip"><input type="radio" name="timing" value="良い求人があれば"><span>良い求人があれば</span></label>
-            </div>
-            <div class="msg">1つ選んでください</div>
-          </div>
-          <div class="field">
-            <div class="lbl">経験のある職種<span class="opt">任意</span></div>
-            <p class="hint">いくつでも選べます</p>
-            <div class="chips">
-              <label class="chip"><input type="checkbox" name="job" value="経理"><span>経理</span></label>
-              <label class="chip"><input type="checkbox" name="job" value="財務"><span>財務</span></label>
-              <label class="chip"><input type="checkbox" name="job" value="会計事務所・税理士法人"><span>会計事務所・税理士法人</span></label>
-              <label class="chip"><input type="checkbox" name="job" value="監査法人"><span>監査法人</span></label>
-              <label class="chip"><input type="checkbox" name="job" value="人事・総務"><span>人事・総務</span></label>
-              <label class="chip"><input type="checkbox" name="job" value="その他"><span>その他</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <div class="lbl">お持ちの資格<span class="opt">任意</span></div>
-            <div class="chips">
-              <label class="chip"><input type="checkbox" name="lic" value="日商簿記2級"><span>日商簿記2級</span></label>
-              <label class="chip"><input type="checkbox" name="lic" value="日商簿記1級"><span>日商簿記1級</span></label>
-              <label class="chip"><input type="checkbox" name="lic" value="税理士（科目合格を含む）"><span>税理士（科目合格を含む）</span></label>
-              <label class="chip"><input type="checkbox" name="lic" value="公認会計士"><span>公認会計士</span></label>
-              <label class="chip"><input type="checkbox" name="lic" value="USCPA"><span>USCPA</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <label class="lbl" for="income">今の年収<span class="opt">任意</span></label>
-            <select id="income" name="income"><option value="" selected>選択してください</option></select>
-          </div>
+        <div class="field" data-req="kana" data-label="フリガナ">
+          <div class="lbl">フリガナ<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><div class="row2">
+            <label class="in"><small>セイ</small><input type="text" name="seiK" placeholder="例）ヤマダ"></label>
+            <label class="in"><small>メイ</small><input type="text" name="meiK" placeholder="例）タロウ"></label>
+          </div><p class="hint">ひらがなで入力しても、カタカナに直します</p><div class="msg">カタカナで入力してください</div></div>
         </div>
-      </section>
-
-      <section class="card" id="sec3">
-        <div class="card-h"><span class="n">03</span><h2>ご相談の内容</h2><span class="sub">あとからでも伝えられます</span></div>
-        <div class="card-b">
-          <div class="field">
-            <div class="lbl">ご希望の相談方法<span class="opt">任意</span></div>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="how" value="電話"><span>電話</span></label>
-              <label class="chip"><input type="radio" name="how" value="オンライン面談"><span>オンライン面談</span></label>
-              <label class="chip"><input type="radio" name="how" value="来社して面談"><span>来社して面談</span></label>
-            </div>
-          </div>
-          <div class="field">
-            <label class="lbl" for="note">聞きたいこと・ご希望<span class="opt">任意</span></label>
-            <textarea id="note" name="note" maxlength="1000" placeholder="例）企業名と残業時間を知りたいです。平日は18時以降だと電話に出られます。"></textarea>
-          </div>
+        <div class="field" data-req="birth" data-label="生年月日">
+          <div class="lbl">生年月日<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><div class="row">
+            <select class="s" name="bY" data-opts="birthY"><option value="">年</option></select><span>年</span>
+            <select class="s" name="bM" data-opts="month"><option value="">月</option></select><span>月</span>
+            <select class="s" name="bD" data-opts="day"><option value="">日</option></select><span>日</span>
+          </div><div class="msg">生年月日を選んでください</div></div>
         </div>
-      </section>
-
-      <div class="agree">
-        <label><input type="checkbox" name="agree" id="agree"><span><a href="#">個人情報の取り扱い</a>に同意する</span></label>
-        <p>同意いただくと、内容の確認に進めます</p>
-      </div>
-      </div>
-    </form>
-
-    <!-- STEP 2: confirm -->
-    <section id="confirm" hidden style="display:flex;flex-direction:column;gap:24px">
-      <div class="card cf"><div class="card-h"><span class="n">01</span><h2>お名前とご連絡先</h2><button class="edit" type="button" data-edit="sec1">修正する</button></div><div class="card-b"><dl id="cf1"></dl></div></div>
-      <div class="card cf"><div class="card-h"><span class="n">02</span><h2>今のご状況</h2><button class="edit" type="button" data-edit="sec2">修正する</button></div><div class="card-b"><dl id="cf2"></dl></div></div>
-      <div class="card cf"><div class="card-h"><span class="n">03</span><h2>ご相談の内容</h2><button class="edit" type="button" data-edit="sec3">修正する</button></div><div class="card-b"><dl id="cf3"></dl></div></div>
-    </section>
-
-    <!-- STEP 3: done -->
-    <section id="done" hidden>
-      <div class="done">
-        <div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C9AE74" stroke-width="2.2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <span class="eyebrow">THANK YOU</span>
-        <h2>ご相談を受け付けました</h2>
-        <p><span id="doneName"></span>様、お申し込みありがとうございます。<br>確認のメールを <b id="doneMail"></b> にお送りしました。</p>
-        <div class="flow">
-          <h2>このあとの流れ</h2>
-          <ol>
-            <li><i>1</i><span><b>アドバイザーからご連絡</b>2営業日以内に、お電話かメールでご連絡します。</span></li>
-            <li><i>2</i><span><b>面談（30分〜1時間）</b>求人の詳しい内容と企業名をお伝えし、ご経験やご希望を伺います。</span></li>
-            <li><i>3</i><span><b>応募・選考</b>応募書類の添削や面接の日程調整も、アドバイザーがお手伝いします。</span></li>
-          </ol>
+        <div class="field" data-req="email" data-label="メールアドレス">
+          <label class="lbl" for="email">メールアドレス<span class="req">必須</span><span class="okm">✓</span></label>
+          <div class="ctl"><input id="email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="例）taro.yamada@example.com"><div class="msg">メールアドレスの形をご確認ください</div></div>
         </div>
-        <div class="btns" style="margin-top:8px"><a class="btn btn-line" href="KeiriZaimu_embedded_7.html">求人一覧にもどる</a></div>
+        <div class="field" data-req="tel" data-label="電話番号">
+          <label class="lbl" for="tel">電話番号<span class="req">必須</span><span class="okm">✓</span></label>
+          <div class="ctl"><input id="tel" type="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="例）09012345678"><p class="hint">ハイフンはあってもなくても大丈夫です</p><div class="msg">10桁か11桁の番号を入力してください</div></div>
+        </div>
+        <div class="field" data-req="pref" data-label="お住まい">
+          <label class="lbl" for="pref">お住まいの都道府県<span class="req">必須</span><span class="okm">✓</span></label>
+          <div class="ctl"><select id="pref" name="pref" data-opts="pref" autocomplete="address-level1"><option value="">選択してください</option></select><div class="msg">選んでください</div></div>
+        </div>
       </div>
     </section>
-  </main>
 
-  <aside class="side" id="side">
-    <div class="job">
-      <div class="job-h"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9AE74" stroke-width="2" aria-hidden="true"><rect x="3" y="7" width="18" height="13"/><path d="M8 7V4h8v3"/></svg>ご相談する求人</div>
-      <div class="job-b">
-        <div class="tags"><span class="tag" id="jKind">社名非公開求人</span><span class="no">No. <span id="jNo">240078</span></span></div>
-        <p class="job-t" id="jTitle">京都市内・駅近・業績安定の上場不動産管理会社での経理スタッフ求人！！</p>
-        <div class="job-f">
-          <span><b>想定年収</b><span class="num" id="jSal">600万円 ～ 900万円</span></span>
-          <span><b>勤務地</b><span id="jLoc">京都府</span></span>
+    <!-- 2 学歴 -->
+    <section class="card" id="sec2" data-title="学歴">
+      <div class="card-h"><span class="n">02</span><h2>学歴</h2><span class="sub">最終学歴だけで大丈夫です</span></div>
+      <div class="card-b" id="eduWrap"></div>
+      <div class="card-b" style="padding-top:0"><button type="button" class="addbtn" data-add="edu">＋ 学歴を追加する</button></div>
+    </section>
+
+    <!-- 3 現状・職務経歴 -->
+    <section class="card" id="sec3" data-title="現状・職務経歴">
+      <div class="card-h"><span class="n">03</span><h2>現状・職務経歴</h2></div>
+      <div class="card-b">
+        <div class="grp">今のご状況</div>
+        <div class="field chipf" data-req="status" data-label="就業状況">
+          <div class="lbl">就業状況<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><div class="chips">
+            <label class="chip"><input type="radio" name="status" value="在職中"><span>在職中</span></label>
+            <label class="chip"><input type="radio" name="status" value="離職中"><span>離職中</span></label>
+            <label class="chip"><input type="radio" name="status" value="就業経験なし"><span>就業経験なし</span></label>
+          </div><div class="msg">1つ選んでください</div></div>
         </div>
-        <p class="job-note" id="jNote">企業名は、アドバイザーからお伝えします。</p>
+        <div class="field" data-req="income" data-label="現在の年収" data-unit="万円">
+          <label class="lbl" for="income">現在の年収<span class="req">必須</span><span class="okm">✓</span></label>
+          <div class="ctl"><div class="row"><input id="income" class="w-num" type="text" inputmode="numeric" name="income" placeholder="例）500"><span>万円</span></div><p class="hint">税込・賞与を含む金額。離職中の方は前職の年収を入力してください</p><div class="msg">数字で入力してください</div></div>
+        </div>
+        <div class="field" data-req="changes" data-label="転職回数">
+          <label class="lbl" for="changes">転職回数<span class="req">必須</span><span class="okm">✓</span></label>
+          <div class="ctl"><select id="changes" name="changes" class="s" style="width:180px"><option value="">選択してください</option><option>なし</option><option>1回</option><option>2回</option><option>3回</option><option>4回</option><option>5回以上</option></select><div class="msg">選んでください</div></div>
+        </div>
+        <div class="field" data-req="jobs" data-label="経験職種">
+          <div class="lbl">経験職種<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><div id="jobRows" style="display:flex;flex-direction:column;gap:8px"></div>
+            <button type="button" class="addbtn" data-add="job">＋ 経験職種を追加する（3つまで）</button>
+            <div class="msg">職種と経験年数を選んでください</div></div>
+        </div>
+        <div class="field" data-label="経験業務">
+          <div class="lbl">経験業務<span class="opt">任意</span></div>
+          <div class="ctl">
+            <p class="hint" style="margin:0">分類を選ぶと、業務の一覧が出ます。いくつでも選べます</p>
+            <div class="chips sm" id="taskCats"></div>
+            <div class="tasks" id="tasks" hidden><div class="chips sm" id="taskList"></div></div>
+            <p class="hint" id="taskSel"></p>
+          </div>
+        </div>
+
+        <div id="careerWrap"></div>
+        <button type="button" class="addbtn" data-add="career" style="margin-top:12px">＋ 職務経歴を追加する</button>
       </div>
+    </section>
+
+    <!-- 4 資格・スキル -->
+    <section class="card" id="sec4" data-title="所有資格・スキル">
+      <div class="card-h"><span class="n">04</span><h2>所有資格・スキル</h2><span class="sub">任意</span></div>
+      <div class="card-b">
+        <div class="field chipf" data-label="資格">
+          <div class="lbl">資格<span class="opt">任意</span></div>
+          <div class="ctl"><div class="chips sm">
+            <label class="chip"><input type="checkbox" name="lic" value="日商簿記2級"><span>日商簿記2級</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="日商簿記1級"><span>日商簿記1級</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="税理士"><span>税理士</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="税理士科目合格"><span>税理士科目合格</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="公認会計士"><span>公認会計士</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="会計士試験合格"><span>会計士試験合格</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="USCPA"><span>USCPA</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="社会保険労務士"><span>社会保険労務士</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="弁護士"><span>弁護士</span></label>
+            <label class="chip"><input type="checkbox" name="lic" value="司法書士"><span>司法書士</span></label>
+          </div><input type="text" name="licOther" placeholder="その他の資格（例：ビジネス実務法務検定2級）"></div>
+        </div>
+        <div class="field chipf" data-label="語学力">
+          <div class="lbl">語学力<span class="opt">任意</span></div>
+          <div class="ctl"><div class="chips sm">
+            <label class="chip"><input type="radio" name="eng" value="ビジネスレベル"><span>ビジネスレベル</span></label>
+            <label class="chip"><input type="radio" name="eng" value="日常会話レベル"><span>日常会話レベル</span></label>
+            <label class="chip"><input type="radio" name="eng" value="読み書きのみ"><span>読み書きのみ</span></label>
+            <label class="chip"><input type="radio" name="eng" value="使わない"><span>使わない</span></label>
+          </div><div class="row"><span>TOEIC</span><input class="w-num" type="text" inputmode="numeric" name="toeic" placeholder="例）800"><span>点</span></div></div>
+        </div>
+        <div class="field chipf" data-label="PC・システム">
+          <div class="lbl">PC・システム<span class="opt">任意</span></div>
+          <div class="ctl"><div class="chips sm">
+            <label class="chip"><input type="checkbox" name="pc" value="Excel（関数）"><span>Excel（関数）</span></label>
+            <label class="chip"><input type="checkbox" name="pc" value="Excel（ピボット）"><span>Excel（ピボット）</span></label>
+            <label class="chip"><input type="checkbox" name="pc" value="Excel（VBA・マクロ）"><span>Excel（VBA・マクロ）</span></label>
+            <label class="chip"><input type="checkbox" name="pc" value="勘定奉行"><span>勘定奉行</span></label>
+            <label class="chip"><input type="checkbox" name="pc" value="SAP"><span>SAP</span></label>
+            <label class="chip"><input type="checkbox" name="pc" value="freee・マネーフォワード"><span>freee・マネーフォワード</span></label>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 希望転職条件 -->
+    <section class="card" id="sec5" data-title="希望転職条件">
+      <div class="card-h"><span class="n">05</span><h2>希望転職条件</h2></div>
+      <div class="card-b">
+        <div class="grp">希望条件</div>
+        <div class="field" data-req="wishPref" data-label="ご希望の勤務地">
+          <div class="lbl">ご希望の勤務地<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><p class="hint" style="margin:0">地方ごとまとめて、または都道府県を選べます。お住まいの都道府県は先に選んでおきます</p><div class="regions" id="regions"></div><div class="msg">1つ以上選んでください</div></div>
+        </div>
+        <div class="field" data-req="wishJob" data-label="ご希望の職種">
+          <div class="lbl">ご希望の職種<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl">
+            <div class="row" style="flex-wrap:nowrap"><span style="flex:none;width:64px">第1希望</span><select name="wj1" data-opts="job"><option value="">選択してください</option></select></div>
+            <div class="row" style="flex-wrap:nowrap"><span style="flex:none;width:64px">第2希望</span><select name="wj2" data-opts="job"><option value="">選択してください（任意）</option></select></div>
+            <div class="msg">第1希望を選んでください</div></div>
+        </div>
+        <div class="field chipf" data-label="ご希望の業種">
+          <div class="lbl">ご希望の業種<span class="opt">任意</span></div>
+          <div class="ctl"><div class="chips sm" id="wishInd"></div><p class="hint">3つまで選べます</p></div>
+        </div>
+        <div class="field chipf" data-req="empType" data-label="希望の雇用形態">
+          <div class="lbl">希望の雇用形態<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><div class="chips sm">
+            <label class="chip"><input type="checkbox" name="emp" value="正社員" checked><span>正社員</span></label>
+            <label class="chip"><input type="checkbox" name="emp" value="契約社員"><span>契約社員</span></label>
+            <label class="chip"><input type="checkbox" name="emp" value="派遣"><span>派遣</span></label>
+            <label class="chip"><input type="checkbox" name="emp" value="パート・アルバイト"><span>パート・アルバイト</span></label>
+            <label class="chip"><input type="checkbox" name="emp" value="業務委託"><span>業務委託</span></label>
+            <label class="chip"><input type="checkbox" name="emp" value="役員・顧問契約"><span>役員・顧問契約</span></label>
+          </div><div class="msg">1つ以上選んでください</div></div>
+        </div>
+        <div class="field" data-req="minIncome" data-label="最低希望年収" data-unit="万円">
+          <label class="lbl" for="minIncome">最低希望年収<span class="req">必須</span><span class="okm">✓</span></label>
+          <div class="ctl"><div class="row"><input id="minIncome" class="w-num" type="text" inputmode="numeric" name="minIncome" placeholder="例）550"><span>万円以上</span></div><textarea name="incomeNote" placeholder="補足があれば（例：現年収を下回らなければ相談可）" style="min-height:64px"></textarea><div class="msg">数字で入力してください</div></div>
+        </div>
+        <div class="field" id="hourlyF" data-label="希望月給・時給" hidden>
+          <div class="lbl">希望月給・時給<span class="opt">任意</span></div>
+          <div class="ctl"><div class="row"><span>月給</span><input class="w-num" type="text" inputmode="numeric" name="monthly" placeholder="例）30"><span>万円以上</span></div><div class="row"><span>時給</span><input class="w-num" type="text" inputmode="numeric" name="hourly" placeholder="例）2000"><span>円以上</span></div><p class="hint">契約社員・派遣・パートを選んだ方だけ表示しています</p></div>
+        </div>
+        <div class="field chipf" data-label="ご希望の企業規模">
+          <div class="lbl">ご希望の企業規模<span class="opt">任意</span></div>
+          <div class="ctl"><div class="chips sm">
+            <label class="chip"><input type="checkbox" name="size" value="100名以下"><span>100名以下</span></label>
+            <label class="chip"><input type="checkbox" name="size" value="100〜999名"><span>100〜999名</span></label>
+            <label class="chip"><input type="checkbox" name="size" value="1,000名以上"><span>1,000名以上</span></label>
+            <label class="chip"><input type="checkbox" name="size" value="こだわらない"><span>こだわらない</span></label>
+          </div></div>
+        </div>
+        <div class="field chipf" data-label="こだわり条件">
+          <div class="lbl">こだわり条件<span class="opt">任意</span></div>
+          <div class="ctl"><div class="chips sm" id="kodawari"></div></div>
+        </div>
+
+        <div class="grp">転勤と時期</div>
+        <div class="field chipf" data-label="転居を伴う転勤">
+          <div class="lbl">転居を伴う転勤<span class="opt">任意</span></div>
+          <div class="ctl"><div class="chips sm">
+            <label class="chip"><input type="radio" name="move" value="可"><span>可</span></label>
+            <label class="chip"><input type="radio" name="move" value="条件付きで可"><span>条件付きで可</span></label>
+            <label class="chip"><input type="radio" name="move" value="不可"><span>不可</span></label>
+          </div><input type="text" name="moveNote" placeholder="条件があれば（例：関東圏内なら可）"></div>
+        </div>
+        <div class="field chipf" data-req="timing" data-label="ご希望の転職時期">
+          <div class="lbl">ご希望の転職時期<span class="req">必須</span><span class="okm">✓</span></div>
+          <div class="ctl"><div class="chips sm">
+            <label class="chip"><input type="radio" name="timing" value="すぐにでも"><span>すぐにでも</span></label>
+            <label class="chip"><input type="radio" name="timing" value="3か月以内"><span>3か月以内</span></label>
+            <label class="chip"><input type="radio" name="timing" value="半年以内"><span>半年以内</span></label>
+            <label class="chip"><input type="radio" name="timing" value="1年以内"><span>1年以内</span></label>
+            <label class="chip"><input type="radio" name="timing" value="良い求人があれば"><span>良い求人があれば</span></label>
+          </div><div class="msg">1つ選んでください</div></div>
+        </div>
+
+        <div id="freeGrp" hidden>
+          <div class="grp">業務委託・フリーランス向けの希望条件</div>
+          <div class="field chipf" data-label="稼働日数">
+            <div class="lbl">稼働日数<span class="opt">任意</span></div>
+            <div class="ctl"><div class="chips sm">
+              <label class="chip"><input type="radio" name="days" value="週1日"><span>週1日</span></label>
+              <label class="chip"><input type="radio" name="days" value="週2日"><span>週2日</span></label>
+              <label class="chip"><input type="radio" name="days" value="週3日"><span>週3日</span></label>
+              <label class="chip"><input type="radio" name="days" value="週4日"><span>週4日</span></label>
+              <label class="chip"><input type="radio" name="days" value="週5日以上"><span>週5日以上</span></label>
+            </div></div>
+          </div>
+          <div class="field" data-label="1日の稼働時間">
+            <label class="lbl" for="hours">1日の稼働時間<span class="opt">任意</span></label>
+            <div class="ctl"><select id="hours" name="hours" class="s" style="width:180px"><option value="">選択してください</option><option>1〜3時間</option><option>4〜6時間</option><option>7〜8時間</option><option>9時間以上</option></select><p class="hint">「業務委託」を選んだ方だけ表示しています</p></div>
+          </div>
+        </div>
+
+        <div class="grp">ご相談について</div>
+        <div class="field" data-label="アドバイザーへの質問・ご要望">
+          <label class="lbl" for="note">質問・ご要望<span class="opt">任意</span></label>
+          <div class="ctl"><textarea id="note" name="note" maxlength="1000" placeholder="例）企業名と残業時間を知りたいです。平日は18時以降だと電話に出られます。"></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="agree">
+      <label><input type="checkbox" name="agree" id="agree"><span><a href="#">会員規約</a>と<a href="#">個人情報の取り扱い</a>に同意する</span></label>
+      <p>同意いただくと、内容の確認に進めます</p>
     </div>
-    <div class="flow side-flow">
-      <h2>ご相談のあとの流れ</h2>
+  </div></form>
+
+  <section id="confirm" hidden style="display:flex;flex-direction:column;gap:24px"></section>
+
+  <section id="done" hidden>
+    <div class="done">
+      <div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C9AE74" stroke-width="2.2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>ご相談を受け付けました</h2>
+      <p><span id="doneName"></span>様、お申し込みありがとうございます。<br>確認のメールを <b id="doneMail"></b> にお送りしました。</p>
       <ol>
-        <li><i>1</i><span><b>アドバイザーからご連絡</b>2営業日以内にご連絡します</span></li>
-        <li><i>2</i><span><b>面談</b>企業名や詳しい内容をお伝えします</span></li>
-        <li><i>3</i><span><b>応募・選考</b>書類や面接もお手伝いします</span></li>
+        <li><i>1</i><span><b>アドバイザーからご連絡</b>2営業日以内に、お電話かメールでご連絡します。</span></li>
+        <li><i>2</i><span><b>面談（30分〜1時間）</b>求人の詳しい内容と企業名をお伝えし、ご経験やご希望を伺います。</span></li>
+        <li><i>3</i><span><b>応募・選考</b>応募書類の添削や面接の日程調整も、アドバイザーがお手伝いします。</span></li>
       </ol>
+      <a class="btn btn-line" href="KeiriZaimu_embedded_7.html" style="margin-top:8px">求人一覧にもどる</a>
     </div>
-  </aside>
+  </section>
+  </main>
   <p class="demo">※提案用の見本です。入力した内容はどこにも送られません。</p>
 </div>
 
 <div class="bar" id="bar"><div class="bar-in">
-  <div class="prog" id="prog">
-    <span class="prog-t" id="progT">必須項目 あと<b id="left">8</b>つ</span>
-    <span class="prog-bar"><i id="progI"></i></span>
-  </div>
+  <div class="prog" id="prog"><span class="prog-t" id="progT"></span><span class="prog-bar"><i id="progI"></i></span></div>
   <button type="button" class="btn btn-gold" id="next" aria-disabled="true">入力内容を確認する<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
   <button type="button" class="btn btn-line" id="backBtn" hidden>修正する</button>
   <button type="button" class="btn btn-navy" id="send" hidden>この内容で相談する</button>
@@ -398,115 +504,220 @@ input:focus,select:focus,textarea:focus{background:var(--white);border-color:var
 
 <script>
 (function(){
-  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-  const form=$('#form');
+  const $=(s,r)=>(r||document).querySelector(s), $$=(s,r)=>[...(r||document).querySelectorAll(s)];
+  const form=$('#form'), Y=new Date().getFullYear();
 
-  // job info from the clicked card
+  // job from query
   const q=new URLSearchParams(location.search);
-  if(q.get('no')){
-    $('#jNo').textContent=q.get('no');
-    $('#jTitle').textContent=q.get('t')||'';
-    $('#jSal').textContent=q.get('s')||'';
-    $('#jLoc').textContent=q.get('l')||'';
-    const k=q.get('k')||'社名非公開求人';
-    $('#jKind').textContent=k;
-    if(k==='公開求人'){$('#jKind').classList.add('pub');$('#jNote').textContent='求人の詳しい内容や選考の進め方を、アドバイザーがご案内します。';}
+  [['no','#jNo'],['t','#jTitle'],['s','#jSal'],['l','#jLoc'],['k','#jKind']].forEach(([k,id])=>{ if(q.get(k)) $(id).textContent=q.get(k); });
+
+  // option lists
+  const PREFS='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
+  const REGIONS=[['北海道・東北',0,7],['関東',7,14],['上信越・北陸',14,20],['東海',20,24],['関西',24,30],['中国',30,35],['四国',35,39],['九州・沖縄',39,47]];
+  const JOBS=['経理・財務','人事・総務','法務・知財','経営企画・内部監査','広報IR・マーケ・購買','秘書・オフィスワーク','会計事務所・税理士法人','監査法人','法律・特許事務所','社会保険労務士事務所','コンサルティング','金融','役員・その他'];
+  const YEARS=['1年未満','1〜3年','3〜5年','5〜10年','10年以上'];
+  const INDS=['メーカー','商社','IT・通信','金融','不動産・建設','小売・サービス','医療・福祉','会計・法律事務所','コンサルティング','官公庁・団体'];
+  const KOD=['上場企業','IPO準備','外資系','リモートワーク可','フレックス','土日祝休み','残業月20時間以内','年間休日120日以上','マネジメント経験を活かす','未経験OK','英語を活かす','駅から徒歩5分以内','産休・育休の実績あり','副業OK','時短勤務OK'];
+  const TASKS={
+    '経理・財務':['日次・月次決算','年次決算','連結決算','税務申告','開示（有報・短信）','予算・管理会計','資金管理・調達','IPO準備','監査対応'],
+    '人事・総務':['給与計算','社会保険手続き','採用','労務管理','人事制度','研修・育成','総務全般'],
+    '法務・知財':['契約書の作成・審査','株主総会・取締役会','コンプライアンス','紛争・訴訟対応','M&A・組織再編','知財管理'],
+    '会計事務所・税理士法人':['記帳代行','決算・申告','相続税','事業承継','資産税','会計監査']
+  };
+  const opt=(sel,list)=>list.forEach(v=>sel.add(new Option(v,v)));
+  function fillOpts(root){
+    $$('select[data-opts]',root).forEach(s=>{ if(s.dataset.filled) return; s.dataset.filled=1; const t=s.dataset.opts;
+      if(t==='birthY') for(let y=Y-18;y>=Y-75;y--) s.add(new Option(y,y));
+      if(t==='year') for(let y=Y+4;y>=Y-60;y--) s.add(new Option(y,y));
+      if(t==='month') for(let m=1;m<=12;m++) s.add(new Option(m,m));
+      if(t==='day') for(let d=1;d<=31;d++) s.add(new Option(d,d));
+      if(t==='pref') opt(s,PREFS.concat('海外'));
+      if(t==='job') opt(s,JOBS);
+      if(t==='years') opt(s,YEARS);
+      if(t==='ind') opt(s,INDS);
+    });
+  }
+  const chip=(name,v,type)=>`<label class="chip"><input type="${type||'checkbox'}" name="${name}" value="${v}"><span>${v}</span></label>`;
+  $('#wishInd').innerHTML=INDS.map(v=>chip('ind',v)).join('');
+  $('#kodawari').innerHTML=KOD.map(v=>chip('kod',v)).join('');
+
+  // ---- repeatable blocks
+  const period=(p,lbl1,lbl2,now)=>`<div class="row"><select class="s" name="${p}Y1" data-opts="year"><option value="">年</option></select><span>年</span><select class="s" name="${p}M1" data-opts="month"><option value="">月</option></select><span>月 〜</span><select class="s" name="${p}Y2" data-opts="year"><option value="">年</option></select><span>年</span><select class="s" name="${p}M2" data-opts="month"><option value="">月</option></select><span>月</span>${now?`<label class="chip" style="margin-left:4px"><input type="checkbox" name="${p}Now" value="現在"><span>現在まで</span></label>`:''}</div>`;
+  let eduN=0,carN=0,jobN=0;
+  function addEdu(){ if(eduN>=3) return; eduN++; const i=eduN, req=i===1;
+    const el=document.createElement('div'); el.className='blk'; el.dataset.blk='edu'+i;
+    el.innerHTML=`<div class="grp">${i===1?'最終学歴':'学歴 '+i}${i>1?'<button type="button" class="rm">削除する</button>':''}</div>
+      <div class="field" ${req?'data-req="edu"':''} data-label="期間" data-type="period"><div class="lbl">期間${req?'<span class="req">必須</span><span class="okm">✓</span>':'<span class="opt">任意</span>'}</div><div class="ctl">${period('e'+i)}<p class="hint">入学 〜 卒業（見込み）の年月</p><div class="msg">入学と卒業の年月を選んでください</div></div></div>
+      <div class="field chipf" ${req?'data-req="eduType"':''} data-label="学校の種類"><div class="lbl">学校の種類${req?'<span class="req">必須</span><span class="okm">✓</span>':''}</div><div class="ctl"><div class="chips sm">${['大学院','大学','短期大学','専門学校','高等専門学校','高校','その他'].map(v=>chip('eT'+i,v,'radio')).join('')}</div><div class="msg">選んでください</div></div></div>
+      <div class="field chipf" ${req?'data-req="eduGrad"':''} data-label="卒業区分"><div class="lbl">卒業区分${req?'<span class="req">必須</span><span class="okm">✓</span>':''}</div><div class="ctl"><div class="chips sm">${['卒業','卒業見込み','中退','在学中'].map(v=>chip('eG'+i,v,'radio')).join('')}</div><div class="msg">選んでください</div></div></div>
+      <div class="field" ${req?'data-req="eduName"':''} data-label="学校名・学部・学科"><label class="lbl">学校名・学部・学科${req?'<span class="req">必須</span><span class="okm">✓</span>':''}</label><div class="ctl"><input type="text" name="eN${i}" placeholder="例）〇〇大学 経済学部 経済学科"><div class="msg">入力してください</div></div></div>`;
+    $('#eduWrap').appendChild(el); fillOpts(el); wireRm(el,()=>{eduN--;});
+    if(eduN>=3) $('[data-add=edu]').hidden=true;
+  }
+  function addJob(){ if(jobN>=3) return; jobN++; const i=jobN;
+    const el=document.createElement('div'); el.className='row jobrow'; el.style.flexWrap='nowrap';
+    el.innerHTML=`<select name="jT${i}" data-opts="job"><option value="">職種を選択</option></select><select name="jY${i}" data-opts="years" style="width:150px;flex:none"><option value="">経験年数</option></select>${i>1?'<button type="button" class="rm" style="flex:none;background:none;border:0;color:var(--text-mute);font-size:20px;cursor:pointer" aria-label="削除">×</button>':''}`;
+    $('#jobRows').appendChild(el); fillOpts(el);
+    const rm=$('.rm',el); if(rm) rm.onclick=()=>{el.remove();jobN--;$('[data-add=job]').hidden=false;update();};
+    if(jobN>=3) $('[data-add=job]').hidden=true;
+  }
+  function addCareer(){ if(carN>=5) return; carN++; const i=carN, req=i===1;
+    const el=document.createElement('div'); el.className='blk'; el.dataset.blk='car'+i;
+    const R=(k)=>req?`data-req="${k}"`:'', B=req?'<span class="req">必須</span><span class="okm">✓</span>':'<span class="opt">任意</span>';
+    el.innerHTML=`<div class="grp">職務経歴 ${i}${i===1?'（今の会社・直近の会社）':''}${i>1?'<button type="button" class="rm">削除する</button>':''}</div>
+      <div class="field" ${R('carPeriod')} data-label="在籍期間" data-type="period"><div class="lbl">在籍期間${B}</div><div class="ctl">${period('c'+i,'','',true)}<div class="msg">入社年月と退社年月（または「現在まで」）を選んでください</div></div></div>
+      <div class="field" ${R('carName')} data-label="会社名"><label class="lbl">会社名${B}</label><div class="ctl"><input type="text" name="cN${i}" placeholder="例）株式会社〇〇"><p class="hint">企業に知られたくない場合も、ここには正しく入力してください。応募先に無断で伝えることはありません</p><div class="msg">入力してください</div></div></div>
+      <div class="field chipf" ${R('carEmp')} data-label="雇用形態"><div class="lbl">雇用形態${B}</div><div class="ctl"><div class="chips sm">${['正社員','契約社員','派遣','パート・アルバイト','業務委託','役員'].map(v=>chip('cE'+i,v,'radio')).join('')}</div><div class="msg">選んでください</div></div></div>
+      <div class="field" ${R('carInd')} data-label="業界"><label class="lbl">業界${B}</label><div class="ctl"><select name="cI${i}" data-opts="ind"><option value="">選択してください</option></select><div class="msg">選んでください</div></div></div>
+      <div class="field chipf" data-label="上場区分・従業員数"><div class="lbl">上場区分・従業員数<span class="opt">任意</span></div><div class="ctl"><div class="chips sm">${['上場','非上場'].map(v=>chip('cL'+i,v,'radio')).join('')}</div><div class="row"><span>約</span><input class="w-num" type="text" inputmode="numeric" name="cS${i}" placeholder="例）300"><span>人</span></div></div></div>
+      <div class="field" data-label="部署・役職"><div class="lbl">部署・役職<span class="opt">任意</span></div><div class="ctl"><div class="row2"><input type="text" name="cD${i}" placeholder="部署（例：経理部）"><select name="cP${i}"><option value="">役職を選択</option><option>役職なし</option><option>主任・リーダー</option><option>係長</option><option>課長</option><option>部長</option><option>役員</option></select></div></div></div>
+      <div class="field" data-label="業務内容"><label class="lbl">業務内容<span class="opt">任意</span></label><div class="ctl"><textarea name="cW${i}" placeholder="例）月次・年次決算、連結決算（子会社5社）、監査法人対応"></textarea></div></div>`;
+    $('#careerWrap').appendChild(el); fillOpts(el); wireRm(el,()=>{carN--;});
+    if(i===1 && val('status')==='在職中'){ const n=$('[name=c1Now]',el); n.checked=true; }
+  }
+  function wireRm(el,cb){ const b=$('.grp .rm',el); if(b) b.onclick=()=>{el.remove();cb();$$('.addbtn').forEach(x=>x.hidden=false);update();}; }
+  $$('[data-add]').forEach(b=>b.onclick=()=>{({edu:addEdu,job:addJob,career:addCareer})[b.dataset.add](); update();});
+  fillOpts(document); addEdu(); addJob(); addCareer();
+
+  // experience tasks
+  let curCat=null; const picked=new Set();
+  $('#taskCats').innerHTML=Object.keys(TASKS).map(c=>chip('taskCat',c,'radio')).join('');
+  $('#taskCats').addEventListener('change',e=>{curCat=e.target.value; renderTasks();});
+  function renderTasks(){ $('#tasks').hidden=!curCat; $('#taskList').innerHTML=(TASKS[curCat]||[]).map(t=>`<label class="chip"><input type="checkbox" data-task="${curCat}：${t}" ${picked.has(curCat+'：'+t)?'checked':''}><span>${t}</span></label>`).join(''); showPicked(); }
+  $('#taskList').addEventListener('change',e=>{const k=e.target.dataset.task; e.target.checked?picked.add(k):picked.delete(k); showPicked();});
+  function showPicked(){ $('#taskSel').textContent=picked.size?'選んだ業務：'+[...picked].join('、'):''; }
+
+  // regions (wish prefecture)
+  $('#regions').innerHTML=REGIONS.map(([n,a,b],ri)=>`<div class="region" data-r="${ri}"><div class="region-h"><label><input type="checkbox" class="rAll">${n}</label><span class="cnt"></span><button type="button" class="rTog" aria-expanded="false">都道府県を選ぶ ▾</button></div><div class="region-b" hidden><div class="chips sm">${PREFS.slice(a,b).map(p=>chip('wp',p)).join('')}</div></div></div>`).join('')+`<div class="region"><div class="region-h"><label><input type="checkbox" name="wp" value="海外">海外</label></div></div>`;
+  $$('.region[data-r]').forEach(r=>{
+    const all=$('.rAll',r), boxes=$$('input[name=wp]',r), tog=$('.rTog',r), body=$('.region-b',r);
+    const sync=()=>{const n=boxes.filter(b=>b.checked).length; all.checked=n===boxes.length; all.indeterminate=n>0&&n<boxes.length; $('.cnt',r).textContent=n?n+'件選択中':'';};
+    all.onchange=()=>{boxes.forEach(b=>b.checked=all.checked); sync(); update();};
+    boxes.forEach(b=>b.addEventListener('change',sync));
+    tog.onclick=()=>{body.hidden=!body.hidden; tog.setAttribute('aria-expanded',!body.hidden); tog.textContent=body.hidden?'都道府県を選ぶ ▾':'閉じる ▴';};
+    r._sync=sync;
+  });
+  let prefSeeded=false;
+  $('#pref').addEventListener('change',e=>{ if(prefSeeded) return; const b=$(`input[name=wp][value="${e.target.value}"]`); if(b&&!$$('input[name=wp]:checked').length){ b.checked=true; prefSeeded=true; const r=b.closest('.region'); r._sync&&r._sync(); $('.region-b',r).hidden=false; $('.rTog',r).textContent='閉じる ▴'; update(); } });
+
+  // conditional fields
+  function cond(){
+    const emp=$$('input[name=emp]:checked').map(x=>x.value);
+    $('#freeGrp').hidden=!emp.includes('業務委託');
+    $('#hourlyF').hidden=!emp.some(v=>['契約社員','派遣','パート・アルバイト'].includes(v));
+    const ind=$$('input[name=ind]:checked'); $$('input[name=ind]').forEach(x=>x.disabled=!x.checked&&ind.length>=3);
   }
 
-  // select options
-  const by=$('select[name=birth]'), now=new Date().getFullYear();
-  for(let y=now-20;y>=now-70;y--){const o=new Option(y+'年',y);by.add(o)}
-  by.value='';
-  const prefs='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県 海外'.split(' ');
-  const pf=$('select[name=pref]'); prefs.forEach(p=>pf.add(new Option(p,p)));
-  const inc=$('#income'); ['300万円未満','300〜400万円','400〜500万円','500〜600万円','600〜700万円','700〜800万円','800〜1,000万円','1,000万円以上'].forEach(v=>inc.add(new Option(v,v)));
-
   // helpers
-  const val=n=>{const e=form.elements[n]; if(!e) return ''; if(e instanceof RadioNodeList){ if(e[0]&&e[0].type==='checkbox') return [...e].filter(x=>x.checked).map(x=>x.value).join('、'); return e.value;} return e.type==='checkbox'?e.checked:e.value.trim();};
+  function val(n){ const els=$$(`[name="${n}"]`,form); if(!els.length) return ''; const e=els[0];
+    if(e.type==='radio') return (els.find(x=>x.checked)||{}).value||'';
+    if(e.type==='checkbox') return els.length>1? els.filter(x=>x.checked).map(x=>x.value).join('、') : (e.checked?e.value:'');
+    return (e.value||'').trim(); }
   const toKata=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60)).replace(/\s+/g,'');
-  const half=s=>s.replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/[－ー―‐-]/g,'');
+  const half=s=>s.replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0));
+  const isNum=v=>/^\d{2,5}$/.test(v);
 
   const rules={
     name:()=>val('sei')&&val('mei'),
     kana:()=>/^[ァ-ヶー]+$/.test(val('seiK'))&&/^[ァ-ヶー]+$/.test(val('meiK')),
+    birth:()=>val('bY')&&val('bM')&&val('bD'),
     email:()=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('email')),
-    tel:()=>/^0\d{9,10}$/.test(half(val('tel'))),
-    birth:()=>val('birth')&&val('pref'),
+    tel:()=>/^0\d{9,10}$/.test(half(val('tel')).replace(/[^\d]/g,'')),
+    pref:()=>!!val('pref'),
+    edu:()=>val('e1Y1')&&val('e1M1')&&val('e1Y2')&&val('e1M2'),
+    eduType:()=>!!val('eT1'), eduGrad:()=>!!val('eG1'), eduName:()=>!!val('eN1'),
     status:()=>!!val('status'),
+    income:()=>isNum(half(val('income'))),
+    changes:()=>!!val('changes'),
+    jobs:()=>val('jT1')&&val('jY1'),
+    carPeriod:()=>val('c1Y1')&&val('c1M1')&&(val('c1Now')||(val('c1Y2')&&val('c1M2'))),
+    carName:()=>!!val('cN1'), carEmp:()=>!!val('cE1'), carInd:()=>!!val('cI1'),
+    wishPref:()=>$$('input[name=wp]:checked').length>0,
+    wishJob:()=>!!val('wj1'),
+    empType:()=>$$('input[name=emp]:checked').length>0,
+    minIncome:()=>isNum(half(val('minIncome'))),
     timing:()=>!!val('timing'),
   };
-  const keys=Object.keys(rules), total=keys.length+1;
+  const keys=()=>Object.keys(rules).filter(k=>$(`.field[data-req="${k}"]`));
   const touched=new Set();
-
-  function check(k){
-    const f=$(`.field[data-req="${k}"]`), ok=!!rules[k]();
-    f.classList.toggle('valid',ok);
-    f.classList.toggle('err',!ok&&touched.has(k));
-    return ok;
-  }
+  function check(k){ const f=$(`.field[data-req="${k}"]`); if(!f) return true; const ok=!!rules[k](); f.classList.toggle('valid',ok); f.classList.toggle('err',!ok&&touched.has(k)); return ok; }
   function update(){
-    let n=keys.filter(check).length + ($('#agree').checked?1:0);
-    const left=total-n;
-    $('#progT').innerHTML=left? '必須項目 あと<b id="left">'+left+'</b>つ' : '<span style="color:var(--ok);font-weight:700">✓ 入力完了</span>';
-    $('#progI').style.width=(n/total*100)+'%';
+    cond();
+    const ks=keys(), done=ks.filter(check).length+($('#agree').checked?1:0), total=ks.length+1, left=total-done;
+    $('#progT').innerHTML=left?`必須 あと<b>${left}</b>項目`:'<span style="color:var(--ok);font-weight:700">✓ 入力完了</span>';
+    $('#progI').style.width=(done/total*100)+'%';
     $('#next').setAttribute('aria-disabled',left?'true':'false');
+    $$('#snav a').forEach(a=>{ const sec=$('#'+a.dataset.sec); const rk=$$('.field[data-req]',sec).map(f=>f.dataset.req); const d=rk.filter(k=>rules[k]()).length;
+      a.classList.toggle('ok',rk.length?d===rk.length:false); $('small',a).textContent=rk.length?`${d}/${rk.length}`:'任意'; });
     return left===0;
   }
-  const fieldKey=el=>{const f=el.closest('.field[data-req]');return f&&f.dataset.req};
-
-  form.addEventListener('input',e=>{
-    const k=fieldKey(e.target);
-    if(k&&(e.target.type==='radio'||e.target.tagName==='SELECT')) touched.add(k);
-    update();
-  });
+  const keyOf=el=>{const f=el.closest('.field[data-req]');return f&&f.dataset.req};
+  form.addEventListener('input',e=>{const k=keyOf(e.target); if(k&&(e.target.type==='radio'||e.target.type==='checkbox'||e.target.tagName==='SELECT')){ const f=e.target.closest('.field'); const sels=$$('select',f); if(!sels.length||sels.every(s=>s.value)||rules[k]()) touched.add(k);} update();});
   form.addEventListener('change',update);
-  form.addEventListener('focusout',e=>{
-    const t=e.target;
+  form.addEventListener('focusout',e=>{ const t=e.target;
     if(t.name==='seiK'||t.name==='meiK') t.value=toKata(t.value);
-    if(t.name==='tel') t.value=half(t.value).replace(/\s/g,'');
-    if(t.name==='email') t.value=t.value.trim().replace(/[＠]/g,'@');
-    const k=fieldKey(t);
-    if(!k) return;
-    // for two-input fields, only flag once both were visited or left
-    const f=t.closest('.field'); const ins=[...f.querySelectorAll('input[type=text],select')];
-    if(ins.length<2 || ins.every(i=>i.value) || !f.contains(e.relatedTarget)) touched.add(k);
-    update();
-  });
+    if(t.name==='tel') t.value=half(t.value).replace(/[^\d]/g,'');
+    if(['income','minIncome','toeic','monthly','hourly'].includes(t.name)||/^cS\d/.test(t.name)) t.value=half(t.value).replace(/[^\d]/g,'');
+    if(t.name==='email') t.value=t.value.trim().replace(/＠/g,'@');
+    if(t.name==='income' && t.value && !val('minIncome')) $('#minIncome').placeholder='例）'+t.value;
+    const k=keyOf(t); if(!k) return; const f=t.closest('.field');
+    if(!f.contains(e.relatedTarget)) touched.add(k); update(); });
+  $('#form').addEventListener('change',e=>{ if(e.target.name==='status'){ const n=$('[name=c1Now]'); if(n) n.checked=e.target.value==='在職中'; update(); } });
 
-  // steps
+  // section nav highlight
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) $$('#snav a').forEach(a=>a.classList.toggle('cur',a.dataset.sec===e.target.id)); }),{rootMargin:'-30% 0px -60% 0px'});
+  $$('section.card[id^=sec]').forEach(s=>io.observe(s));
+
+  // confirm
+  function fieldValue(f){
+    if(f.dataset.type==='period'){ const s=$$('select',f).map(x=>x.value); const now=$('input[type=checkbox]',f); if(!s[0]) return ''; return `${s[0]}年${s[1]}月 〜 `+(now&&now.checked?'現在':(s[2]?`${s[2]}年${s[3]}月`:'')); }
+    if(f.closest('#regions')||$('#regions',f)) return $$('input[name=wp]:checked').map(x=>x.value).join('、');
+    if($('#taskCats',f)) return [...picked].join('、');
+    if($('#jobRows',f)) return $$('.jobrow',f).map(r=>{const s=$$('select',r).map(x=>x.value);return s[0]?s[0]+(s[1]?'（'+s[1]+'）':''):''}).filter(Boolean).join('\n');
+    const out=[],chips=[];
+    $$('input,select,textarea',f).forEach(x=>{
+      if(x.type==='radio'||x.type==='checkbox'){ if(x.checked&&x.name) chips.push(x.value); return; }
+      if(!x.value.trim()) return;
+      const row=x.closest('.row'); const pre=row&&row.firstElementChild&&row.firstElementChild.tagName==='SPAN'&&row.firstElementChild!==x?row.firstElementChild.textContent+' ':'';
+      const suf=row&&x.nextElementSibling&&x.nextElementSibling.tagName==='SPAN'?x.nextElementSibling.textContent:'';
+      out.push(pre+x.value.trim()+suf);
+    });
+    return [chips.join('、'),out.join(f.querySelector('textarea')?'\n':' ')].filter(Boolean).join('\n');
+  }
+  function buildConfirm(){
+    const c=$('#confirm'); c.innerHTML='';
+    $$('section.card[id^=sec]').forEach((sec,si)=>{
+      let rows='',pend='';
+      $$('.grp, .field',sec).forEach(f=>{
+        if(f.closest('[hidden]')) return;
+        if(f.classList.contains('grp')){ pend=`<dt class="g">${esc(f.childNodes[0].textContent.trim())}</dt>`; return; }
+        const v=fieldValue(f); if(!v&&!f.dataset.req) return;
+        rows+=pend+`<dt>${esc(f.dataset.label||'')}</dt><dd>${esc(v)}</dd>`; pend='';
+      });
+      if(!rows) rows='<dd class="none" style="grid-column:1/-1">入力なし（あとからでも大丈夫です）</dd>';
+      c.insertAdjacentHTML('beforeend',`<div class="card cf"><div class="card-h"><span class="n">0${si+1}</span><h2>${esc(sec.dataset.title)}</h2><button class="edit" type="button" data-edit="${sec.id}">修正する</button></div><div class="card-b"><dl>${rows}</dl></div></div>`);
+    });
+    $$('[data-edit]',c).forEach(b=>b.onclick=()=>{setStep(1);$('#'+b.dataset.edit).scrollIntoView({block:'start'});});
+  }
   function setStep(n){
-    ['st1','st2','st3'].forEach((id,i)=>{const li=$('#'+id);li.className=i+1===n?'on':(i+1<n?'done':'');});
+    ['st1','st2','st3'].forEach((id,i)=>{$('#'+id).className=i+1===n?'on':(i+1<n?'done':'');});
     form.hidden=n!==1; $('#confirm').hidden=n!==2; $('#done').hidden=n!==3;
     $('#prog').style.visibility=n===1?'visible':'hidden';
-    $('#next').hidden=n!==1; $('#backBtn').hidden=n!==2; $('#send').hidden=n!==2;
-    $('#bar').hidden=n===3;
-    $('#lead h1').textContent=n===1?'この求人について相談する':n===2?'入力内容のご確認':'お申し込み完了';
-    $('#lead p').textContent=n===1?'キャリアアドバイザーが、求人の詳しい内容や企業名をご案内します。ご相談は無料です。':n===2?'内容をご確認のうえ、「この内容で相談する」を押してください。':'';
-    $('#lead .meta').hidden=n!==1;
-    $('#side').hidden=n===3;
+    $('#next').hidden=n!==1; $('#backBtn').hidden=n!==2; $('#send').hidden=n!==2; $('#bar').hidden=n===3;
+    $('#snav').style.visibility=n===1?'visible':'hidden';
+    $('#leadH').textContent=n===1?'ご経歴とご希望を入力してください':n===2?'入力内容のご確認':'お申し込み完了';
+    $('#leadP').textContent=n===1?'アドバイザーが、ご経歴にあった求人や企業名をご案内します。任意の項目は、あとからでも大丈夫です。':n===2?'内容をご確認のうえ、「この内容で相談する」を押してください。':'';
     scrollTo({top:0,behavior:'instant'});
   }
-
-  $('#next').addEventListener('click',()=>{
-    if(!update()){
-      keys.forEach(k=>touched.add(k)); update();
-      const first=$('.field.err')||(!$('#agree').checked&&$('.agree'));
-      if(first){first.scrollIntoView({behavior:'smooth',block:'center'}); const i=first.querySelector('input,select'); if(i) setTimeout(()=>i.focus({preventScroll:true}),350);}
-      if(!$('#agree').checked && !$('.field.err')) $('.agree').animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:300});
-      return;
-    }
-    const dl=(id,rows)=>{$(id).innerHTML=rows.map(([k,v])=>`<dt>${k}</dt><dd class="${v?'':'none'}">${v?esc(v):'未入力'}</dd>`).join('')};
-    dl('#cf1',[['お名前',val('sei')+' '+val('mei')+'（'+val('seiK')+' '+val('meiK')+'）'],['メールアドレス',val('email')],['電話番号',val('tel')],['生まれ年',val('birth')+'年'],['お住まい',val('pref')]]);
-    dl('#cf2',[['今の就業状況',val('status')],['転職を考えている時期',val('timing')],['経験のある職種',val('job')],['お持ちの資格',val('lic')],['今の年収',val('income')]]);
-    dl('#cf3',[['ご希望の相談方法',val('how')],['聞きたいこと・ご希望',val('note')]]);
-    setStep(2);
-  });
-  $('#backBtn').addEventListener('click',()=>setStep(1));
-  $$('[data-edit]').forEach(b=>b.addEventListener('click',()=>{setStep(1);$('#'+b.dataset.edit).scrollIntoView({block:'start'});}));
-  $('#send').addEventListener('click',()=>{
-    $('#doneName').textContent=val('sei')+' '+val('mei'); $('#doneMail').textContent=val('email');
-    setStep(3);
-  });
+  $('#next').onclick=()=>{
+    if(!update()){ keys().forEach(k=>touched.add(k)); update();
+      const first=$('.field.err'); if(first){ first.scrollIntoView({behavior:'smooth',block:'center'}); const i=$('input:not([type=checkbox]):not([type=radio]),select',first); if(i) setTimeout(()=>i.focus({preventScroll:true}),350); }
+      else if(!$('#agree').checked){ $('.agree').scrollIntoView({behavior:'smooth',block:'center'}); $('.agree').animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:300}); }
+      return; }
+    buildConfirm(); setStep(2);
+  };
+  $('#backBtn').onclick=()=>setStep(1);
+  $('#send').onclick=()=>{ $('#doneName').textContent=val('sei')+' '+val('mei'); $('#doneMail').textContent=val('email'); setStep(3); };
   function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
   update();
 })();
