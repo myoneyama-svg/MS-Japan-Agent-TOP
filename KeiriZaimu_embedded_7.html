@@ -143,7 +143,24 @@ article > div{padding-left:18px !important;padding-right:18px !important}
 @media (max-width:600px){.kw-row{flex-wrap:wrap}.kw-row > label{flex-basis:100% !important}.kw-row > button{flex:1 1 0 !important}}
 @media (max-width:1000px){img[data-ph]{width:100% !important;height:100% !important;object-fit:cover}}
 </style>
-<style>@media (max-width:760px){.kz-cta{flex-direction:column}.kz-cta img.kz-cta-img[data-ph]{flex:none !important;width:100% !important;height:220px !important}.kz-cta>span{padding:24px 20px !important}}</style><style>@media (min-width:1181px){.col-side{align-self:stretch}.col-side>a{order:-1}.col-side .facet{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgb(201,174,116) transparent}.col-side .facet>h2{position:sticky;top:0;z-index:2}}</style></head>
+<style>@media (max-width:760px){.kz-cta{flex-direction:column}.kz-cta img.kz-cta-img[data-ph]{flex:none !important;width:100% !important;height:220px !important}.kz-cta>span{padding:24px 20px !important}}</style><style>@media (min-width:1181px){.col-side{align-self:stretch}.col-side>a{order:-1}.col-side .facet{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgb(201,174,116) transparent}.col-side .facet>h2{position:sticky;top:0;z-index:2}}</style><style>
+.kz-kw{display:flex;flex-direction:column;gap:10px;padding:16px 18px 18px;background:#FAF8F4;border-bottom:1px solid #EFEAE0}
+.kz-kw-in{display:flex;align-items:center;gap:8px;height:46px;padding:0 12px;border:1px solid #D7D1C4;background:#fff}
+.kz-kw-in:focus-within{border-color:#10224F;box-shadow:0 0 0 3px rgba(16,34,79,.12)}
+.kz-kw-in input{flex:1;min-width:0;height:44px;border:0;background:transparent;font:inherit;font-size:14px;color:#0E1A36;outline:none}
+.kz-kw-btn{height:44px;border:0;background:#10224F;color:#fff;font:inherit;font-size:14px;font-weight:700;letter-spacing:.12em;cursor:pointer}
+.kz-cond{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.kz-cond-l{font-size:11px;color:#4A5368}
+.kz-chip{display:inline-flex;align-items:center;height:26px;padding:0 10px;background:#10224F;color:#fff;font-size:12px;font-weight:700}
+.kz-close{display:none;margin-left:auto;width:32px;height:32px;border:0;background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.kz-spbar{display:none}
+@media (max-width:1180px){
+ .kz-spbar{display:flex;flex-direction:column;gap:10px;padding:14px 16px;background:#fff;border:1px solid #E3DED3}
+ .kz-open{display:flex;align-items:center;justify-content:center;gap:8px;height:50px;border:1px solid #10224F;background:#fff;color:#10224F;font:inherit;font-size:14px;font-weight:700;letter-spacing:.08em;cursor:pointer}
+ .kz-close{display:block}
+ .kz-shade{position:fixed;inset:0;z-index:59;background:rgba(11,26,62,.45)}
+}
+</style></head>
 <body>
 <div class="sc-host" data-sc-name="keiri_local"><div class="jp" style="color: rgb(14, 26, 54); background: rgb(245, 242, 236); overflow-x: clip;"><header style="position: relative; z-index: 5; background: rgb(255, 255, 255); border-bottom: 1px solid rgb(227, 222, 211);">
   <div class="wrap" style="max-width: none; display: flex; align-items: center; gap: 28px; height: 72px; padding-right: 0px;">
@@ -195,22 +212,10 @@ article > div{padding-left:18px !important;padding-right:18px !important}
       </section>
 
       
-      <section aria-label="求人を検索" style="display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; background: rgb(255, 255, 255); border: 1px solid rgb(227, 222, 211);">
-        <div class="kw-row" style="display: flex; gap: 8px;">
-          <label style="flex: 1 1 auto; min-width: 0px; display: flex; align-items: center; gap: 10px; height: 52px; padding: 0px 16px; border: 1px solid rgb(215, 209, 196); background: rgb(250, 248, 244);">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8C6D33" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
-            <input id="kw" type="search" placeholder="キーワードで探す（例：連結決算、IPO、リモート）" aria-label="キーワード" style="flex: 1 1 auto; min-width: 0px; height: 50px; border: 0px; background: transparent; font-size: 14px; color: rgb(14, 26, 54); font-family: inherit; outline: none;">
-          </label>
-          <button type="button" class="shine-btn shine-noshadow" style="flex: 0 0 120px; height: 52px; border: 0px; background: rgb(16, 34, 79); color: rgb(255, 255, 255); font-size: 14px; font-weight: 700; letter-spacing: 0.12em; cursor: pointer; font-family: inherit;"><span>検索する</span></button>
-          <button type="button" class="sp-only" style="display: none; flex: 0 0 auto; align-items: center; gap: 6px; height: 52px; padding: 0px 14px; border: 1px solid rgb(16, 34, 79); background: rgb(255, 255, 255); color: rgb(16, 34, 79); font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>絞り込み<span class="serif"><span class="sc-interp"></span></span></button>
-        </div>
-        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px;">
-          <span style="font-size: 11px; color: rgb(74, 83, 104); margin-right: 2px;">検索条件</span>
-          <span style="display: inline-flex; align-items: center; height: 28px; padding: 0px 12px; background: rgb(16, 34, 79); color: rgb(255, 255, 255); font-size: 12px; font-weight: 700;">職種：経理・財務</span>
-          
-          
-        </div>
-      </section>
+      <div class="kz-spbar">
+        <button type="button" class="kz-open"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8C6D33" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><span>キーワード・条件で探す</span></button>
+        <div class="kz-cond"><span class="kz-cond-l">検索条件</span><span class="kz-chip">職種：経理・財務</span></div>
+      </div>
 
       
       <div class="tbar" style="display: flex; flex-direction: column; gap: 0px; background: rgb(255, 255, 255); border: 1px solid rgb(227, 222, 211);">
@@ -1183,7 +1188,12 @@ d)粘り強く、問題解決へ向けて努力できる方</span>…</dd>
     
     <aside class="col-side" style="gap: 20px;">
       <section class="facet" data-open="0" style="display: flex; flex-direction: column; background: rgb(255, 255, 255); border: 1px solid rgb(227, 222, 211);">
-        <h2 style="margin: 0px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 18px; background: rgb(16, 34, 79); color: rgb(255, 255, 255); font-size: 15px; font-weight: 700; letter-spacing: 0.1em;"><span style="display: inline-flex; align-items: center; gap: 8px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9AE74" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>条件を絞り込む</span></h2>
+        <h2 style="margin: 0px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 18px; background: rgb(16, 34, 79); color: rgb(255, 255, 255); font-size: 15px; font-weight: 700; letter-spacing: 0.1em;"><span style="display: inline-flex; align-items: center; gap: 8px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9AE74" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>キーワード・条件で探す</span><button type="button" class="kz-close" aria-label="閉じる">×</button></h2>
+        <div class="kz-kw">
+          <label class="kz-kw-in"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8C6D33" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg><input id="kw" type="search" placeholder="例：連結決算、IPO" aria-label="キーワード"></label>
+          <button type="button" class="kz-kw-btn shine-btn shine-noshadow"><span>検索する</span></button>
+          <div class="kz-cond"><span class="kz-cond-l">検索条件</span><span class="kz-chip">職種：経理・財務</span></div>
+        </div>
         
           <div style="display: flex; flex-direction: column; gap: 6px; padding: 14px 18px 16px; border-top: 1px solid rgb(239, 234, 224);">
             <h3 style="margin: 0px 0px 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: rgb(16, 34, 79);"><span class="sc-interp">勤務地</span></h3>
@@ -1310,5 +1320,5 @@ d)粘り強く、問題解決へ向けて努力できる方</span>…</dd>
     </div>
     <p style="margin: 0px; font-size: 12px; line-height: 1.9; letter-spacing: 0.04em; color: rgb(74, 83, 104);">経理・人事・法務・会計士・税理士・弁護士の管理部門・士業に専門特化した転職エージェントMS-Japan<br><span class="serif" style="font-size: 14px;">株式会社MS-Japan Copyright (C) Matching Service Japan Co., Ltd. All Rights Reserved.</span></p>
   </div></footer></div></div>
-</body>
+<script>(function(){var f=document.querySelector('.col-side .facet');if(!f)return;var shade;function open(){f.setAttribute('data-open','1');shade=document.createElement('div');shade.className='kz-shade';shade.onclick=close;document.body.appendChild(shade);document.body.style.overflow='hidden'}function close(){f.setAttribute('data-open','0');if(shade)shade.remove();document.body.style.overflow=''}document.querySelectorAll('.kz-open').forEach(function(b){b.onclick=open});f.querySelector('.kz-close').onclick=close;f.querySelector('.kz-kw-btn').onclick=close;f.querySelectorAll('button,a').forEach(function(x){if(/件の求人を見る/.test(x.textContent))x.addEventListener('click',function(e){e.preventDefault();close()})});})();</script></body>
 </html>
