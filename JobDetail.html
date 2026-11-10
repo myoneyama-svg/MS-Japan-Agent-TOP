@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>求人詳細｜MS Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0B1A3E;--navy-800:#10224F;--navy-700:#0E1A36;
+  --gold-500:#C9AE74;--gold-600:#B08F52;--gold-700:#8C6D33;
+  --cream-50:#FAF8F4;--cream-100:#F4F1EA;--cream-200:#F7F5F0;--cream-300:#EFEAE0;
+  --line:#E3DED3;--line-soft:#EFEAE0;
+  --text:#0E1A36;--text-sub:#4A5368;--text-mute:#98A3B3;--white:#fff;
+  --font-jp:'游ゴシック体',YuGothic,'游ゴシック Medium','Yu Gothic Medium','游ゴシック','Yu Gothic','Noto Sans JP',sans-serif;
+  --font-en:Montserrat,sans-serif;--font-num:'Cormorant Garamond',serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--cream-100);color:var(--text);font-family:var(--font-jp);font-weight:500;letter-spacing:.04em;line-height:1.8}
+a{color:inherit}
+button{font:inherit;letter-spacing:inherit;color:inherit}
+
+.hdr{background:var(--white);border-bottom:1px solid var(--line)}
+.hdr-in{max-width:1180px;margin:0 auto;height:64px;padding:0 24px;display:flex;align-items:center;gap:16px}
+.hdr img{height:24px;width:auto;display:block}
+.hdr .sp{flex:1}
+.hdr .back{font-size:13px;color:var(--text-sub);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.crumb{max-width:1180px;margin:0 auto;padding:14px 24px;font-size:12px;color:var(--text-sub);display:flex;flex-wrap:wrap;gap:6px}
+.crumb a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.crumb i{font-style:normal;color:var(--gold-600)}
+
+.page{max-width:1180px;margin:0 auto;padding:0 24px 120px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:start}
+.main{min-width:0;display:flex;flex-direction:column;gap:24px}
+
+/* hero */
+.hero{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--navy-800);padding:28px 32px;display:flex;flex-direction:column;gap:16px}
+.tags{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.tag{padding:1px 8px;font-size:11px;font-weight:700;line-height:20px;background:var(--navy-800);color:var(--white);border:1px solid var(--navy-800)}
+.tag.pub{background:var(--white);color:var(--navy-800)}
+.tag.feat{background:var(--white);color:var(--gold-700);border-color:var(--gold-500)}
+.no{font-family:var(--font-num);font-size:14px;color:var(--text-mute);letter-spacing:.08em;margin-left:4px}
+.hero h1{margin:0;font-size:24px;line-height:1.6;letter-spacing:.04em;color:var(--navy-800);overflow-wrap:anywhere}
+.pos{margin:0;font-size:13px;color:var(--text-sub)}
+.pos b{color:var(--navy-800);margin-right:8px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-soft);background:var(--cream-50)}
+.fact{padding:14px 16px;display:flex;flex-direction:column;gap:2px;border-left:1px solid var(--line-soft);min-width:0}
+.fact:first-child{border-left:0}
+.fact span{font-size:11px;font-weight:700;color:var(--gold-700);display:flex;align-items:center;gap:6px}
+.fact b{font-size:15px;color:var(--navy-800);overflow-wrap:anywhere}
+.fact.sal{grid-column:span 2}
+.fact.sal b{font-family:var(--font-num);font-size:26px;font-weight:600;line-height:1.3;letter-spacing:.02em}
+.secret{display:flex;align-items:center;gap:10px;margin:0;padding:10px 14px;background:var(--cream-200);font-size:13px;color:var(--text-sub)}
+.hero-act{display:flex;gap:10px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 28px;border:0;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:filter .15s}
+.btn:hover{filter:brightness(1.05)}
+.btn-gold{background:var(--gold-500);color:var(--navy-900);min-width:240px}
+.btn-line{background:var(--white);color:var(--navy-800);border:1px solid var(--navy-800)}
+.btn-line[aria-pressed=true]{background:var(--navy-800);color:var(--white)}
+.btn small{font-size:11px;font-weight:700;padding:1px 6px;background:var(--navy-800);color:var(--white);letter-spacing:.06em}
+
+/* in-page tabs */
+.toc{position:sticky;top:0;z-index:10;display:flex;background:var(--white);border:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.toc a{flex:1 0 auto;display:flex;align-items:center;justify-content:center;height:52px;padding:0 18px;font-size:14px;font-weight:700;text-decoration:none;color:var(--text-sub);border-bottom:3px solid transparent;white-space:nowrap}
+.toc a.on{color:var(--navy-800);border-bottom-color:var(--navy-800)}
+
+/* sections */
+.sec{background:var(--white);border:1px solid var(--line)}
+.sec-h{display:flex;align-items:baseline;gap:14px;padding:18px 32px;border-bottom:1px solid var(--line-soft)}
+.sec-h .en{font-family:var(--font-en);font-size:10px;font-weight:600;letter-spacing:.22em;color:var(--gold-700)}
+.sec-h h2{margin:0;font-size:18px;letter-spacing:.1em;color:var(--navy-800)}
+.sec-b{padding:22px 32px 28px;display:flex;flex-direction:column;gap:16px}
+.prose{margin:0;font-size:14px;line-height:2;white-space:pre-line;overflow-wrap:anywhere}
+.more{margin:0;font-size:12px;color:var(--text-mute)}
+.req2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.reqbox{border:1px solid var(--line-soft);background:var(--cream-50);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.reqbox h3{margin:0;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--navy-800)}
+.reqbox h3 span{padding:0 8px;font-size:11px;line-height:20px;background:var(--navy-800);color:var(--white)}
+.reqbox.want h3 span{background:var(--gold-500);color:var(--navy-900)}
+.reqbox ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.reqbox li{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:13px;line-height:1.8}
+.reqbox li::before{content:"";width:14px;height:14px;margin-top:5px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B08F52' stroke-width='3'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/contain no-repeat}
+.reqbox p{margin:0;font-size:13px;white-space:pre-line}
+.dl{margin:0;display:grid;grid-template-columns:160px 1fr;border-top:1px solid var(--line-soft)}
+.dl dt,.dl dd{margin:0;padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.dl dt{font-weight:700;color:var(--navy-800);display:flex;align-items:flex-start;gap:8px}
+.dl dt::before{content:"";width:3px;height:14px;margin-top:5px;background:var(--gold-500);flex:none}
+.dl dd{white-space:pre-line}
+.sample{margin:0;font-size:11px;color:var(--text-mute)}
+
+/* cta band */
+.cta{background:var(--navy-800);color:var(--white);padding:30px 32px;display:grid;grid-template-columns:1fr auto;gap:20px 32px;align-items:center;background-image:repeating-radial-gradient(circle at 100% 0,transparent 0 22px,rgba(201,174,116,.14) 22px 23px)}
+.cta .en{font-family:var(--font-en);font-size:10px;font-weight:600;letter-spacing:.22em;color:var(--gold-500)}
+.cta h2{margin:4px 0 12px;font-size:19px;letter-spacing:.08em;line-height:1.6}
+.cta ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;color:#D9DDE6}
+.cta li{display:flex;gap:8px}
+.cta li::before{content:"◆";color:var(--gold-500);font-size:9px;margin-top:4px}
+
+/* related */
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rcard{display:flex;flex-direction:column;gap:8px;padding:16px 18px;background:var(--white);border:1px solid var(--line);text-decoration:none;transition:border-color .15s,box-shadow .15s}
+.rcard:hover{border-color:var(--navy-800);box-shadow:0 6px 18px rgba(11,26,62,.08)}
+.rcard .t{font-size:13px;font-weight:700;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.rcard .m{margin-top:auto;font-size:12px;color:var(--text-sub);display:flex;flex-wrap:wrap;gap:4px 12px}
+.rcard .m b{font-family:var(--font-num);font-size:16px;color:var(--navy-800)}
+.rel-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.rel-h h2{margin:0;font-size:18px;letter-spacing:.1em;color:var(--navy-800)}
+.rel-h a{font-size:13px;color:var(--gold-700);font-weight:700}
+
+/* side */
+.side{position:sticky;top:20px;display:flex;flex-direction:column;gap:16px}
+.sum{background:var(--white);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:12px}
+.sum .lbl{font-size:12px;font-weight:700;color:var(--navy-800);letter-spacing:.1em}
+.sum .t{font-size:13px;font-weight:700;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.sum .r{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--text-sub);border-top:1px solid var(--line-soft);padding-top:8px}
+.sum .r b{color:var(--navy-800);text-align:right}
+.sum .r b.num{font-family:var(--font-num);font-size:17px}
+.sum .btn{width:100%;min-width:0}
+.sum .hint{margin:0;font-size:11px;color:var(--text-mute);text-align:center}
+.flow{background:var(--white);border:1px solid var(--line);padding:16px 20px}
+.flow h2{margin:0 0 10px;font-size:13px;letter-spacing:.1em;color:var(--navy-800)}
+.flow ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:12px;color:var(--text-sub)}
+.flow li{display:grid;grid-template-columns:22px 1fr;gap:8px;line-height:1.6}
+.flow li i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--cream-300);color:var(--navy-800);font-family:var(--font-en);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.flow li b{display:block;color:var(--text);font-size:13px}
+
+.spbar{display:none}
+.demo{grid-column:1/-1;margin:0;font-size:11px;color:var(--text-mute);text-align:center}
+
+@media (max-width:1000px){
+  .page{grid-template-columns:1fr}
+  .side{display:none}
+  .spbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;align-items:center;gap:12px;padding:10px 16px;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(11,26,62,.06)}
+  .spbar .s{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4}
+  .spbar .s span{font-size:10px;font-weight:700;color:var(--gold-700)}
+  .spbar .s b{font-family:var(--font-num);font-size:18px;color:var(--navy-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .spbar .btn{min-width:0;height:48px;padding:0 22px}
+  .spbar .fav{width:48px;padding:0;flex:none}
+}
+@media (max-width:700px){
+  .hdr-in{padding:0 16px;height:56px}
+  .hdr img{height:20px}
+  .crumb{padding:12px 16px}
+  .page{padding:0 16px 110px;gap:20px}
+  .hero{padding:20px 18px}
+  .hero h1{font-size:19px}
+  .facts{grid-template-columns:1fr 1fr}
+  .fact{border-left:0;border-top:1px solid var(--line-soft)}
+  .fact:nth-child(even){border-left:1px solid var(--line-soft)}
+  .fact.sal{grid-column:1/-1;border-top:0}
+  .fact.sal+.fact{border-left:0}
+  .fact.sal~.fact:nth-child(odd){border-left:1px solid var(--line-soft)}
+  .fact.sal~.fact:nth-child(even){border-left:0}
+  .hero-act{flex-direction:column}
+  .hero-act .btn{width:100%;min-width:0}
+  .pc-only{display:none}
+  .sec-h{padding:16px 18px}
+  .sec-b{padding:18px 18px 22px}
+  .req2{grid-template-columns:1fr}
+  .dl{grid-template-columns:1fr}
+  .dl dt{border-bottom:0;padding-bottom:2px}
+  .dl dd{padding-top:0}
+  .cta{grid-template-columns:1fr;padding:26px 20px}
+  .cta .btn{width:100%}
+  .rel{grid-template-columns:1fr}
+  .toc a{padding:0 14px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-in">
+  <a href="KeiriZaimu_embedded_7.html" aria-label="求人一覧へ"><img src="data:image/png;base64,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" alt="MS Agent by MS-Japan"></a>
+  <div class="sp"></div>
+  <a class="back" href="KeiriZaimu_embedded_7.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B08F52" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span class="pc-only">求人一覧に</span>もどる</a>
+</div></header>
+<nav class="crumb" aria-label="パンくず"><a href="#">求人・転職MS Agentトップ</a><i>›</i><a href="KeiriZaimu_embedded_7.html">経理・財務の求人・転職情報</a><i>›</i><span>求人詳細</span></nav>
+
+<div class="page">
+<main class="main">
+  <section class="hero">
+    <div class="tags" id="tags"></div>
+    <h1 id="title"></h1>
+    <p class="pos" id="pos"></p>
+    <div class="facts">
+      <div class="fact sal"><span>想定年収</span><b id="sal"></b></div>
+      <div class="fact"><span>勤務地</span><b id="loc"></b></div>
+      <div class="fact"><span>雇用区分</span><b>正社員</b></div>
+    </div>
+    <p class="secret" id="secret"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B08F52" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><span>企業名は、キャリアアドバイザーからお伝えします。</span></p>
+    <div class="hero-act">
+      <a class="btn btn-gold js-consult" href="#">この求人について相談する<small>無料</small></a>
+      <button type="button" class="btn btn-line js-fav" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg><span>気になる</span></button>
+    </div>
+  </section>
+
+  <nav class="toc" id="toc" aria-label="この求人の内容">
+    <a href="#s-job" class="on">仕事内容</a><a href="#s-req">求める経験</a><a href="#s-cond">募集要項</a><a href="#s-co">企業情報</a>
+  </nav>
+
+  <section class="sec" id="s-job">
+    <div class="sec-h"><span class="en">JOB</span><h2>仕事内容</h2></div>
+    <div class="sec-b"><p class="prose" id="job"></p><p class="more" id="jobMore" hidden>※続きは、キャリアアドバイザーから詳しくご案内します。</p></div>
+  </section>
+
+  <section class="sec" id="s-req">
+    <div class="sec-h"><span class="en">REQUIREMENTS</span><h2>求める経験・能力</h2></div>
+    <div class="sec-b"><div class="req2" id="req"></div><p class="more">条件をすべて満たしていなくても、ご相談いただけます。</p></div>
+  </section>
+
+  <section class="sec" id="s-cond">
+    <div class="sec-h"><span class="en">CONDITIONS</span><h2>募集要項</h2></div>
+    <div class="sec-b">
+      <dl class="dl">
+        <dt>雇用区分</dt><dd>正社員</dd>
+        <dt>想定年収</dt><dd id="sal2"></dd>
+        <dt>勤務地</dt><dd id="loc2"></dd>
+        <dt>勤務時間</dt><dd>9:00〜18:00（フレックスタイム制）</dd>
+        <dt>休日・休暇</dt><dd>完全週休2日制（土・日・祝）
+年末年始休暇、有給休暇、慶弔休暇、産前産後休暇、育児休暇、介護休暇</dd>
+        <dt>年間休日</dt><dd>120日</dd>
+        <dt>給与・手当</dt><dd>賞与 年2回
+通勤手当、時間外手当</dd>
+        <dt>語学力</dt><dd>不要</dd>
+      </dl>
+      <p class="sample">※この欄の勤務時間・休日などは見本の内容です。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s-co">
+    <div class="sec-h"><span class="en">COMPANY</span><h2>企業情報</h2></div>
+    <div class="sec-b">
+      <dl class="dl">
+        <dt>企業名</dt><dd id="coName"></dd>
+        <dt>業種</dt><dd>メーカー・商社など（見本）</dd>
+        <dt>事業内容</dt><dd>面談の中で、事業の内容や組織の様子をくわしくお伝えします。</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div>
+      <span class="en">MS AGENT</span>
+      <h2>この求人のことを、<br>アドバイザーに聞いてみませんか</h2>
+      <ul>
+        <li>企業名や職場の雰囲気など、ここに載っていないことをお伝えします</li>
+        <li>サイトにない完全非公開求人も、あわせてご紹介します</li>
+        <li>応募書類の添削から面接の日程調整まで、すべて無料です</li>
+      </ul>
+    </div>
+    <a class="btn btn-gold js-consult" href="#">この求人について相談する<small>無料</small></a>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <div class="rel-h"><h2>似ている求人</h2><a href="KeiriZaimu_embedded_7.html">経理・財務の求人一覧へ ›</a></div>
+    <div class="rel" id="rel"></div>
+  </section>
+</main>
+
+<aside class="side">
+  <div class="sum">
+    <span class="lbl">この求人</span>
+    <span class="t" id="sTitle"></span>
+    <div class="r"><span>想定年収</span><b class="num" id="sSal"></b></div>
+    <div class="r"><span>勤務地</span><b id="sLoc"></b></div>
+    <a class="btn btn-gold js-consult" href="#">相談する<small>無料</small></a>
+    <button type="button" class="btn btn-line js-fav" aria-pressed="false" style="height:44px;font-size:13px"><span>気になる</span></button>
+    <p class="hint">質問だけのご相談も歓迎です</p>
+  </div>
+  <div class="flow">
+    <h2>ご相談のあとの流れ</h2>
+    <ol>
+      <li><i>1</i><span><b>アドバイザーからご連絡</b>2営業日以内にご連絡します</span></li>
+      <li><i>2</i><span><b>面談</b>企業名や詳しい内容をお伝えします</span></li>
+      <li><i>3</i><span><b>応募・選考</b>書類や面接もお手伝いします</span></li>
+    </ol>
+  </div>
+</aside>
+<p class="demo">※提案用の見本です。</p>
+</div>
+
+<div class="spbar">
+  <div class="s"><span>想定年収</span><b id="pSal"></b></div>
+  <button type="button" class="btn btn-line fav js-fav" aria-pressed="false" aria-label="気になる"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button>
+  <a class="btn btn-gold js-consult" href="#">相談する</a>
+</div>
+
+<script>
+const JOBS=[{"no": "240078", "kind": "社名非公開求人", "title": "京都市内・駅近・業績安定の上場不動産管理会社での経理スタッフ求人！！", "sal": "600万円 ～ 900万円", "loc": "京都府", "feats": [], "pos": "【京都/経理】☆税理士・会計事務所経験者歓迎/スタンダード上場/福利厚生◎", "job": "京都府最大級、関西でも屈指のマンション管理会社であるスタンダード上場の当社にて、経理職をお任せします。\n\n【経理部全体の業務内容】\n・伝票起票、各種照合\n・月次、四半期、年次決算…", "req": "【必須】\n1.能力・実務経験\n・Excel スキル\n・年次決算及び消費税区分経理の実務経験 (5年以上)\n・連結決算又は法人税申告の実務経験 (5年以上)…"}, {"no": "235955", "kind": "社名非公開求人", "title": "【愛知／中区】経理スタッフ／フレックス／プライム上場／リモート可", "sal": "450万円 ～ 550万円", "loc": "愛知県", "feats": [], "pos": "経理スタッフ／450万～550万", "job": "経理課のメンバーとして、これまでのご経験やスキルに応じて以下の業務をお任せします。\n\n【具体的業務】\n■仕訳記帳および個社決算の対応\n日々の取引証憑を確認し、統一システムへ正確に入力（仕訳記帳）します。…", "req": "【必須要件】※下記いずれも満たす方\n・経理の実務経験 3年以上\n・月次決算経験\n\n【歓迎要件】…"}, {"no": "240199", "kind": "社名非公開求人", "title": "【愛知／小牧】財務部長／自動車の内装／経験者歓迎／年間休日120日／福利厚生充実／残業ほぼなし", "sal": "764万円 ～ 930万円", "loc": "愛知県", "feats": [], "pos": "財務部長／764万円～930万円", "job": "創業50年超の独立系優良部品メーカーにて財務部門の課長または部長候補として活躍いただきます。\n決算業務から金融機関との折衝まで、財務・経理全般を統括し、経営的視点で組織を牽引する重要なポジションです。\n\n【具体的業務】…", "req": "【必須】\n財務・管理・税務会計の十分な経験と知識。資金調達等における金融機関との折衝経験。\n会社法や法人税法、財務諸表の基本的理解。経営的視点で物事の本質を考える思考力をお持ちの方を求めています。…"}, {"no": "240280", "kind": "社名非公開求人", "title": "【静岡／浜松】経理／年収〜1050万／駅徒歩1分／プライム上場・光技術の世界的企業", "sal": "890万円 ～ 1,050万円", "loc": "静岡県", "feats": ["マネジメント"], "pos": "経理／890万円～1,050万円", "job": "経理グループの中核として連結決算業務を担当いただきます。\n決算プロセスの運営、子会社との調整、財務数値の分析に加え、メンバー育成や業務改善にも携わっていただきます。\n\n【具体的な業務内容】…", "req": "【必須条件】\n■経理・決算業務の実務経験\n■連結決算を主担当として担った経験\n■浜松地区へ日常的に出社可能な方…"}, {"no": "240545", "kind": "社名非公開求人", "title": "【愛知／知多】経理求人/経験者歓迎/「記念日の宿」を運営/～800万円", "sal": "600万円 ～ 800万円", "loc": "愛知県", "feats": ["マネジメント"], "pos": "経理／～800万円※定年後も活躍できるポジション", "job": "「記念日の宿」を展開する当社にて、経理責任候補を募集いたします。経営層と連携しながら、M＆Ａ案件や経営分析等、企業成長を支える重要な役割を担っていただきます。\n\n【具体的には】経営の未来を数字で導く経理責任者として以下を担います\n■経理・財務業務全般の管理・改善…", "req": "【必須】\n･経理分野の実務５年以上、月次年次決算および組織管理経験\n\n【歓迎条件】\n･経理・財務部門の責任者経験…"}, {"no": "240386", "kind": "社名非公開求人", "title": "◆経理マネージャー候補＜創業25年連続無借金経営＞※複数名採用※「みなとみらい駅」直結", "sal": "600万円 ～ 800万円", "loc": "神奈川県", "feats": ["マネジメント"], "pos": "◆経理マネージャー候補＜創業27期連続・黒字無借金経営／面接1回！／残業ほぼなし！／今期売上2,112億円／業界トップシェアの買取店／全国2,110店舗以上／海外展開も！＞※複数名採用※「みなとみらい駅」直結", "job": "◆管理職としてのキャリアを視野に入れて、ご活躍いただける方を大募集！\n海外拠点を複数拠点増加しており、各拠点のマネージャー候補として複数名採用！\n全体の業務に関するスキルの他、マネジメントスキルも身に付けることができるので、活躍の幅がさらに広がります。…", "req": "【必須条件】\n■経理経験をお持ちの方\n\n【以下の経験をお持ちの方は特に歓迎】…"}, {"no": "239955", "kind": "社名非公開求人", "title": "京都市内・駅近・業績安定の上場不動産管理会社での経理スタッフ求人！！", "sal": "400万円 ～ 500万円", "loc": "京都府", "feats": [], "pos": "【京都・経理スタッフ】【東証スタンダード上場/年間休日120日/働き方◎】", "job": "京都府最大級、関西でも屈指のマンション管理会社であるスタンダード上場の当社にて、経理職をお任せします。\n\n【経理部全体の業務内容】\n・伝票起票、各種照合\n・月次、四半期、年次決算…", "req": "【必須】\n1.能力・実務経験\n・Excelスキル（SUMIFS関数、VLOOKUP関数、ピボットテーブル等）\n・消費税区分経理の実務経験（3年以上）…"}, {"no": "240444", "kind": "社名非公開求人", "title": "経理担当者(東京勤務)【大手食品メーカー】福利厚生制度充実", "sal": "453万円 ～ 546万円", "loc": "東京都", "feats": [], "pos": "経理担当者(東京勤務)【大手食品メーカー】フレックス/残業少", "job": "今回は、経理職・財務職で計2名の採用を予定しております。\n面接の中でご志向や社内バランスを見ながらお任せする業務を相談させていただければと存じます。\n※下記全ての業務に携わっていだだくわけではありません。…", "req": "＜必須＞\n・経理実務経験3年以上（監査法人でのご経験も可）\n・税務・会計知識をお持ちの方（日商簿記２級以上程度）…"}, {"no": "240447", "kind": "社名非公開求人", "title": "5年後の世代交代を見据えた戦略採用！フレックス＆駅近の好環境で、経営直下の次世代CFOへ。", "sal": "700万円 ～ 1,050万円", "loc": "東京都", "feats": ["マネジメント"], "pos": "【経理マネージャー】上場未経験可／フレックス・実働７時間30分／東証スタンダード上場企業", "job": "【業務内容】\n・月次・四半期・年次決算の取りまとめ及び決算早期化の推進\n・単体決算・連結決算の作成（子会社決算の取りまとめを含む）\n・グローバル子会社管理：国内外子会社の決算サポートおよび、経理・財務面からの経営管理…", "req": "《必須条件》\n・年次決算の実務経験\n・マネジメント経験\n\n《歓迎要件》…"}, {"no": "240275", "kind": "社名非公開求人", "title": "越境EC唯一の上場企業！週1出社×フレックスの柔軟な環境で、決算・開示のプロへ成長しませんか？", "sal": "470万円 ～ 620万円", "loc": "東京都", "feats": [], "pos": "【経理担当】上場未経験可／リモート中心・フレックス/急成長の越境EC上場企業で四半期・年次決算や開示まで幅広く経験できる", "job": "【業務内容】\n「上場企業の経理として、決算プロセスを軸に組織の基盤を支える役割」をお任せします。\n　まずは、月次決算業務を担当していただき、徐々に四半期・年次決算や開示、税務業務まで幅広くお任せします。\n\n・決算・税務業務…", "req": "【必須】\n・事業会社、または会計事務所・税理士法人等での月次決算の実務経験（目安3年以上）\n・日商簿記2級程度の知識（資格未取得の場合は、2級相当の決算実務経験）\n・チャットツールやクラウドツールの活用経験…"}, {"no": "240472", "kind": "社名非公開求人", "title": "【会計士限定】プライム上場/大阪/財務経理　（連結決算業務関連担当）/グローバル専門商社", "sal": "720万円 ～ 950万円", "loc": "大阪府", "feats": ["公認会計士", "会計士試験合格"], "pos": "【公認会計士／大阪勤務】年収720〜950万円｜東証プライム・専門商社の連結決算・開示担当｜海外展開あり", "job": "下記が当課の主な業務となりますが、その中の連結決算業務関連を担当してもらう予定です。\n\n（1）連結決算業務\n（2）有価証券報告書等開示業務\n（3）会社法決算関連業務…", "req": "【必須条件】\na)公認会計士\nb)連結決算業務の経験者\nc)コミュニケーション力がある方\nd)粘り強く、問題解決へ向けて努力できる方…"}, {"no": "240404", "kind": "社名非公開求人", "title": "【静岡／遠州森】経理財務／東証スタンダード上場／カスタムパーツ国内大手／土日祝休み", "sal": "400万円 ～ 650万円", "loc": "静岡県", "feats": [], "pos": "経理財務／400～650万円", "job": "■決算実務（月次・四半期・年次）\n◇日常〜月次決算業務\n・仕訳・伝票起票、売掛・買掛金管理、入出金管理、固定資産管理\n・製造委託費用や、輸出入に伴う外貨建取引・為替差損益の管理・計上…", "req": "【必須】\n・月次決算および四半期決算の実務経験をお持ちの方（目安：3年以上）\n\n【歓迎】\n・簿記2級…"}, {"no": "240246", "kind": "社名非公開求人", "title": "【愛知／春日井市】経理求人／未経験可／転勤無／年休129日", "sal": "350万円 ～ 400万円", "loc": "愛知県", "feats": ["未経験OK"], "pos": "経理／未経験歓迎／350万円～400万円／転勤無／年休125日", "job": "経理実務からスタートしていただきます。\nゆくゆくは経営数値の管理や組織運営にも携わって頂きます。\n\n【具体的業務】\n・日次（材料集計・入金支払処理・仕訳確認）・月次・年次決算業務…", "req": "【必須要件】\n・社会人経験1年以上\n・経理や会計の知識をお持ちの方（日商簿記2級程度）\n・普通自動車免許(AT限定可)…"}, {"no": "240433", "kind": "社名非公開求人", "title": "【大阪】経理担当／年休127日／全社平均残業20h／産業機械のグローバル商社", "sal": "450万円 ～ 640万円", "loc": "大阪府", "feats": ["英語を活かす"], "pos": "【大阪/経理】年休127日・福利厚生充実・土日祝休／創業70年以上の機械専門商社", "job": "産業機械、建設機械の販売・輸入・輸出を中心に世界規模での事業を展開、長年の海外取引実績を持つ同社にて組織強化のため、経理担当を募集いたします。\n\n■業務内容：\n当社の経理業務および国内・海外子会社の経理業務をお任せします。…", "req": "■必須条件：\n※いずれも必須\n・経理業務経験3年以上\n・月次・年次・連結決算のいずれかの業務経験がある方\n・簿記２級以上をお持ちの方…"}, {"no": "240406", "kind": "社名非公開求人", "title": "経理スタッフ/フレックスタイム制/上場グループ/多角化を進める成長企業", "sal": "450万円 ～ 550万円", "loc": "東京都", "feats": [], "pos": "経理スタッフ/フレックスタイム制/上場グループ/幼児教育を軸に、国際教育・産後ケアホテル等多角化を進める成長企業", "job": "・仕訳入力、経費精算、支払処理などの日常経理業務\n・売掛金、買掛金、債権債務の管理\n・月次決算業務\n・四半期、年次決算業務のサポート\n・財務諸表および各種経理資料の作成…", "req": "■必須要件：\n・事業会社での経理実務経験\n・日商簿記2級相当以上の会計知識\n・基本的なExcelスキル…"}, {"no": "240513", "kind": "社名非公開求人", "title": "経理スタッフ/英語使用/アフリカのマラリア対策など社会貢献度◎/週4リモート", "sal": "450万円 ～ 600万円", "loc": "東京都", "feats": ["英語を活かす"], "pos": "経理スタッフ※英語使用/社会貢献度◎/週4日リモート可能/フレックス有※", "job": "【月次・原価計算】\n日次・月次仕訳入力・締め業務、工数集計および原価配分の補助\n\n【年次】\n決算整理仕訳の補助、明細の作成、税務申告資料の準備、固定資産台帳の管理…", "req": "必須要件:\n・事業会社での経理実務3年程度（記帳〜月次決算）\n・日商簿記2級以上\n・クラウド会計ソフトの利用経験…"}, {"no": "238899", "kind": "公開求人", "title": "【経理担当】売り上げ好調の高級化粧品ブランドを販売する企業/リモート週3・フレックス", "sal": "530万円 ～ 610万円", "loc": "東京都", "feats": [], "pos": "【経理担当】♦東証プライム上場・KOSEグループ♦リモート週3/フレックス制/残業少", "job": "現在アルビオンではDXを推進しており、その一環として経理部においてもRPAや経費精算システムの導入、原価計算システムの刷新など、業務の自動化・省力化を推進しています。\n今後においても、引き続き全社的に業務の自動化、省力化を進める予定です。\n\n入社後は、以下の業務を担っていただきます。…", "req": "【必須】\n・日商簿記１級の資格をお持ちの方\n・生成AIの使用経験\n\n【歓迎】…"}, {"no": "240553", "kind": "社名非公開求人", "title": "＜プライム上場/経理担当～リーダー/持ち株会社/M＆A積極推進中＞", "sal": "600万円 ～ 800万円", "loc": "東京都", "feats": [], "pos": "経理担当～リーダー候補／プライム上場企業／経理としてM&A・連結決算に挑戦／市場価値を高める", "job": "◆主な業務\n・月次決算、四半期決算、年次決算業務 などの決算対応全般\n・連結決算サポート\n・監査法人対応サポート\n・開示書類の作成サポート…", "req": "＜必須＞\n・経理実務経験3年以上\n・月次決算自走可能な方\n\n＜歓迎 ※必須ではありません＞…"}, {"no": "239550", "kind": "社名非公開求人", "title": "＜ポテンシャル採用＞【大阪】経理スタッフ／年休124日／未経験から経理へキャリアチェンジOK", "sal": "440万円 ～ 600万円", "loc": "大阪府", "feats": ["未経験OK"], "pos": "【大阪・中之島/経理スタッフ】※未経験可/7時間勤務/賞与実績6.3か月/残業平均9.2h", "job": "経理の基礎業務からスタートし、経験・適性に応じて決算や税務、財務業務へと業務範囲を広げていただきます。\n実務を通じて会計・税務の専門性を身につけながら、将来的には管理部門の中核人材として活躍いただくことを期待しています。当面は、大阪本社の財務経理部にて、経験・適性に応じて下記業務を担当いただきます。…", "req": "【必須条件】\n・経理業務の経験のある方\n※未経験・第二新卒の場合でも、ポテンシャルを考慮して選考いたします。\n\n【歓迎条件】…"}, {"no": "239552", "kind": "社名非公開求人", "title": "【大阪】経理スタッフ／年休124日／強い財務体質の優良企業", "sal": "590万円 ～ 760万円", "loc": "大阪府", "feats": [], "pos": "【大阪・中之島/経理】※7時間勤務/平均年収860万超/賞与実績6.3か月/残業平均9.2h", "job": "大企業の分業制では経験できない幅広い管理業務に携わりながら、経営に近い立場で会社運営を支える仕事です。これまでの経理経験や会計・税務の専門経験を活かし、決算・税務・財務を中心に財務経理部門の中核メンバーとして活躍いただきます。…", "req": "【必須条件】\n・経理業務または会計税務関連業務の実務経験（5年以上）\n・日商簿記2級以上またはそれに準ずる資格保有者\n\n【歓迎条件】…"}];
+(function(){
+  const $=s=>document.querySelector(s);
+  const no=new URLSearchParams(location.search).get('no');
+  const j=JOBS.find(x=>x.no===no)||JOBS[0];
+  const pub=j.kind==='公開求人';
+  document.title=j.title+'｜MS Agent';
+  $('#tags').innerHTML=`<span class="tag${pub?' pub':''}">${esc(j.kind)}</span>`+j.feats.map(f=>`<span class="tag feat">${esc(f)}</span>`).join('')+`<span class="no">No. ${esc(j.no)}</span>`;
+  $('#title').textContent=j.title;
+  $('#pos').innerHTML=j.pos?`<b>ポジション</b>${esc(j.pos)}`:'';
+  ['#sal','#sal2','#sSal','#pSal'].forEach(s=>$(s).textContent=j.sal);
+  ['#loc','#loc2','#sLoc'].forEach(s=>$(s).textContent=j.loc);
+  $('#sTitle').textContent=j.title;
+  if(pub){$('#secret span').textContent='求人の詳しい内容や選考の進め方を、キャリアアドバイザーがご案内します。';$('#coName').textContent='面談の中でお伝えします';}
+  else $('#coName').textContent='社名非公開（キャリアアドバイザーからお伝えします）';
+  const cut=t=>t.replace(/…$/,'');
+  $('#job').textContent=cut(j.job); if(/…$/.test(j.job)) $('#jobMore').hidden=false;
+
+  // requirements: split must / welcome
+  const r=cut(j.req);
+  const m=r.split(/(?=【歓迎)/);
+  const box=(cls,label,text)=>{
+    const body=text.replace(/^【[^】]*】\s*/,'').trim();
+    const lines=body.split('\n').map(x=>x.trim()).filter(Boolean);
+    const items=lines.filter(l=>/^[・■●\-－]/.test(l)||/^\d+[.．]/.test(l)===false&&lines.length>1);
+    const list=lines.every(l=>!/^[・■●]/.test(l))? `<p>${esc(body)}</p>` : '<ul>'+lines.map(l=>`<li>${esc(l.replace(/^[・■●\-－]\s*/,''))}</li>`).join('')+'</ul>';
+    return `<div class="reqbox ${cls}"><h3><span>${label}</span>${label==='必須'?'あてはまると良い経験':'あるとさらに良い経験'}</h3>${list}</div>`;
+  };
+  $('#req').innerHTML=box('must','必須',m[0])+(m[1]?box('want','歓迎',m[1]):`<div class="reqbox want"><h3><span>歓迎</span>あるとさらに良い経験</h3><p>くわしくは、キャリアアドバイザーからご案内します。</p></div>`);
+  if(/…$/.test(j.req)) $('#req').insertAdjacentHTML('afterend','<p class="more">※続きは、キャリアアドバイザーから詳しくご案内します。</p>');
+
+  // consult links
+  const q=new URLSearchParams({no:j.no,k:j.kind,t:j.title,s:j.sal,l:j.loc}).toString();
+  document.querySelectorAll('.js-consult').forEach(a=>a.href='Consult_Form.html?'+q);
+
+  // favourite toggle (in-page only)
+  const favs=document.querySelectorAll('.js-fav');
+  favs.forEach(b=>b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')!=='true';favs.forEach(x=>{x.setAttribute('aria-pressed',on);const s=x.querySelector('span');if(s)s.textContent=on?'気になる済み':'気になる';});}));
+
+  // related: same prefecture first, then others
+  const others=JOBS.filter(x=>x.no!==j.no);
+  others.sort((a,b)=>(b.loc===j.loc)-(a.loc===j.loc));
+  $('#rel').innerHTML=others.slice(0,3).map(x=>`<a class="rcard" href="JobDetail.html?no=${x.no}"><div class="tags"><span class="tag${x.kind==='公開求人'?' pub':''}">${esc(x.kind)}</span></div><span class="t">${esc(x.title)}</span><span class="m"><b>${esc(x.sal)}</b><span>${esc(x.loc)}</span></span></a>`).join('');
+
+  // toc highlight
+  const links=[...document.querySelectorAll('#toc a')];
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-80px 0px -60% 0px'});
+  links.forEach(l=>io.observe(document.querySelector(l.getAttribute('href'))));
+
+  function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+})();
+</script>
+</body>
+</html>
