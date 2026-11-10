@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>求人について相談する｜MS Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0B1A3E;--navy-800:#10224F;--navy-700:#0E1A36;
+  --gold-500:#C9AE74;--gold-600:#B08F52;--gold-700:#8C6D33;
+  --cream-50:#FAF8F4;--cream-100:#F4F1EA;--cream-200:#F7F5F0;--cream-300:#EFEAE0;
+  --line:#E3DED3;--line-soft:#EFEAE0;
+  --text:#0E1A36;--text-sub:#4A5368;--text-mute:#98A3B3;
+  --white:#fff;--error:#B3261E;--error-bg:#FBEDEC;--ok:#2E7D5B;
+  --font-jp:'游ゴシック体',YuGothic,'游ゴシック Medium','Yu Gothic Medium','游ゴシック','Yu Gothic','Noto Sans JP',sans-serif;
+  --font-en:Montserrat,sans-serif;--font-num:'Cormorant Garamond',serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream-100);color:var(--text);font-family:var(--font-jp);font-weight:500;letter-spacing:.04em;line-height:1.7}
+a{color:inherit}
+button,input,select,textarea{font:inherit;letter-spacing:inherit;color:inherit}
+
+/* header */
+.hdr{background:var(--white);border-bottom:1px solid var(--line)}
+.hdr-in{max-width:1120px;margin:0 auto;height:64px;padding:0 24px;display:flex;align-items:center;gap:16px}
+.hdr img{height:24px;width:auto;display:block}
+.hdr .sp{flex:1}
+.hdr .back{font-size:13px;color:var(--text-sub);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.hdr .back:hover{color:var(--navy-800)}
+
+/* steps */
+.steps{background:var(--white);border-bottom:1px solid var(--line)}
+.steps ol{list-style:none;margin:0 auto;padding:18px 24px;max-width:560px;display:flex;justify-content:space-between;position:relative}
+.steps ol::before{content:"";position:absolute;left:calc(24px + 16%);right:calc(24px + 16%);top:33px;height:2px;background:var(--line)}
+.steps li{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--text-mute)}
+.steps .dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--white);border:2px solid var(--line);font-family:var(--font-en);font-size:13px;color:var(--text-mute)}
+.steps li.on{color:var(--navy-800)}
+.steps li.on .dot{background:var(--navy-800);border-color:var(--navy-800);color:var(--white);box-shadow:0 0 0 4px rgba(16,34,79,.12)}
+.steps li.done .dot{background:var(--gold-500);border-color:var(--gold-500);color:var(--navy-900)}
+.steps li.done{color:var(--gold-700)}
+
+/* layout */
+.page{max-width:1120px;margin:0 auto;padding:40px 24px 120px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:32px;align-items:start}
+.lead{grid-column:1/-1;display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.24em;color:var(--gold-700)}
+.lead h1{margin:0;font-size:26px;letter-spacing:.08em;color:var(--navy-800);line-height:1.5}
+.lead p{margin:0;font-size:14px;color:var(--text-sub)}
+.lead .meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:6px;font-size:13px;color:var(--text-sub)}
+.lead .meta span{display:inline-flex;align-items:center;gap:6px}
+
+/* job summary */
+.side{position:sticky;top:20px;display:flex;flex-direction:column;gap:16px}
+.job{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--navy-800)}
+.job-h{padding:12px 18px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--white);background:var(--navy-800);display:flex;align-items:center;gap:8px}
+.job-b{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.tags{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{padding:1px 8px;font-size:11px;font-weight:700;background:var(--navy-800);color:var(--white)}
+.tag.pub{background:var(--white);color:var(--navy-800);border:1px solid var(--navy-800)}
+.no{font-family:var(--font-num);font-size:13px;color:var(--text-mute);letter-spacing:.08em}
+.job-t{margin:0;font-size:14px;font-weight:700;line-height:1.7}
+.job-f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--text-sub)}
+.job-f b{font-size:11px;color:var(--gold-700);margin-right:8px}
+.job-f .num{font-family:var(--font-num);font-size:18px;font-weight:600;color:var(--navy-800)}
+.job-note{margin:0;padding:10px 12px;background:var(--cream-200);font-size:12px;line-height:1.7;color:var(--text-sub)}
+.flow{background:var(--white);border:1px solid var(--line);padding:16px 18px}
+.flow h2{margin:0 0 10px;font-size:13px;letter-spacing:.1em;color:var(--navy-800)}
+.flow ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:12px;color:var(--text-sub)}
+.flow li{display:grid;grid-template-columns:22px 1fr;gap:8px;line-height:1.6}
+.flow li i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--cream-300);color:var(--navy-800);font-family:var(--font-en);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.flow li b{display:block;color:var(--text);font-size:13px}
+
+/* form */
+.main{min-width:0;display:flex;flex-direction:column;gap:24px}
+.card{background:var(--white);border:1px solid var(--line)}
+.card-h{display:flex;align-items:center;gap:12px;padding:16px 28px;border-bottom:1px solid var(--line-soft)}
+.card-h .n{font-family:var(--font-num);font-size:26px;line-height:1;color:var(--gold-600)}
+.card-h h2{margin:0;font-size:17px;letter-spacing:.1em;color:var(--navy-800)}
+.card-h .sub{margin-left:auto;font-size:12px;color:var(--text-mute)}
+.card-b{padding:8px 28px 24px}
+.field{padding:18px 0;border-bottom:1px solid var(--line-soft);display:flex;flex-direction:column;gap:10px}
+.field:last-child{border-bottom:0}
+.lbl{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--navy-800)}
+.req,.opt{flex:none;padding:0 6px;font-size:11px;line-height:20px;font-weight:700;letter-spacing:.06em}
+.req{background:var(--gold-500);color:var(--navy-900)}
+.opt{background:var(--cream-300);color:var(--text-sub)}
+.lbl .ok{margin-left:auto;display:none;align-items:center;gap:4px;font-size:12px;color:var(--ok);font-weight:700}
+.field.valid .lbl .ok{display:inline-flex}
+.hint{margin:-4px 0 0;font-size:12px;color:var(--text-mute)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.in{position:relative;display:flex;flex-direction:column;gap:4px}
+.in small{font-size:11px;color:var(--text-mute)}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;height:52px;padding:0 16px;font-size:16px;background:var(--cream-50);border:1px solid var(--line);border-radius:0;outline:none;transition:border-color .15s,box-shadow .15s,background .15s;-webkit-appearance:none;appearance:none}
+textarea{height:auto;min-height:120px;padding:14px 16px;line-height:1.7;resize:vertical}
+select{padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B08F52' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+select:invalid{color:var(--text-mute)}
+::placeholder{color:#B7BEC9}
+input:focus,select:focus,textarea:focus{background:var(--white);border-color:var(--navy-800);box-shadow:0 0 0 3px rgba(16,34,79,.12)}
+.field.err input,.field.err select{border-color:var(--error);background:var(--error-bg)}
+.msg{display:none;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--error)}
+.field.err .msg{display:flex}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;font-size:14px;background:var(--white);border:1px solid var(--line);cursor:pointer;transition:all .15s;user-select:none}
+.chip span::before{content:"";width:14px;height:14px;border:1px solid #C7C0B0;border-radius:50%;flex:none;transition:all .15s}
+.chip input[type=checkbox]+span::before{border-radius:0}
+.chip input:checked+span{border-color:var(--navy-800);background:var(--navy-800);color:var(--white)}
+.chip input:checked+span::before{border-color:var(--gold-500);background:var(--gold-500);box-shadow:inset 0 0 0 3px var(--navy-800)}
+.chip input:focus-visible+span{box-shadow:0 0 0 3px rgba(16,34,79,.2)}
+.chip:hover span{border-color:var(--navy-800)}
+
+/* consent + actions */
+.agree{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0 0;text-align:center}
+.agree label{display:inline-flex;align-items:center;gap:10px;font-size:14px;cursor:pointer}
+.agree input{width:20px;height:20px;accent-color:var(--navy-800)}
+.agree p{margin:0;font-size:12px;color:var(--text-mute)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-width:320px;height:60px;padding:0 32px;border:0;cursor:pointer;font-size:15px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:filter .15s,opacity .15s}
+.btn-gold{background:var(--gold-500);color:var(--navy-900)}
+.btn-navy{background:var(--navy-800);color:var(--white);border-bottom:2px solid var(--gold-500)}
+.btn-line{background:var(--white);color:var(--navy-800);border:1px solid var(--navy-800)}
+.btn:hover{filter:brightness(1.05)}
+.btn[aria-disabled=true]{opacity:.45;cursor:not-allowed}
+.btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(11,26,62,.06)}
+.bar-in{max-width:1120px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px}
+.prog{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.prog-t{font-size:13px;color:var(--text-sub)}
+.prog-t b{font-family:var(--font-num);font-size:20px;color:var(--navy-800);margin:0 2px}
+.prog-bar{height:4px;background:var(--cream-300)}
+.prog-bar i{display:block;height:100%;width:0;background:var(--gold-500);transition:width .25s}
+.bar .btn{min-width:280px;height:52px}
+
+/* confirm */
+.cf dl{margin:0;display:grid;grid-template-columns:180px 1fr}
+.cf dt,.cf dd{margin:0;padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:14px}
+.cf dt{font-weight:700;color:var(--navy-800)}
+.cf dd{white-space:pre-wrap;overflow-wrap:anywhere}
+.cf dd.none{color:var(--text-mute)}
+.edit{margin-left:auto;font-size:12px;font-weight:700;color:var(--gold-700);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:4px}
+
+/* done */
+.done{background:var(--white);border:1px solid var(--line);padding:48px 40px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.done .ic{width:64px;height:64px;border-radius:50%;background:var(--navy-800);display:flex;align-items:center;justify-content:center}
+.done h2{margin:0;font-size:22px;letter-spacing:.08em;color:var(--navy-800)}
+.done p{margin:0;font-size:14px;color:var(--text-sub);line-height:1.9}
+.done .flow{width:100%;max-width:520px;text-align:left;margin-top:8px}
+
+[hidden]{display:none !important}
+.demo{grid-column:1/-1;margin:0;font-size:11px;color:var(--text-mute);text-align:center}
+
+@media (max-width:960px){
+  .page{grid-template-columns:1fr;padding:24px 16px 120px;gap:20px}
+  .side{position:static;order:-1}
+  .lead{order:-2}
+  .flow.side-flow{display:none}
+}
+@media (max-width:600px){
+  .hdr-in{padding:0 16px;height:56px}
+  .hdr img{height:20px}
+  .steps ol{padding:14px 16px}
+  .steps ol::before{top:29px}
+  .lead h1{font-size:21px}
+  .card-h{padding:14px 18px}
+  .card-b{padding:4px 18px 18px}
+  .row2{gap:8px}
+  .sel2{grid-template-columns:1fr}
+  .card-h .sub,.pc-only{display:none}
+  .chip span{padding:0 14px}
+  .cf dl{grid-template-columns:1fr}
+  .cf dt{border-bottom:0;padding-bottom:0}
+  .cf dd{padding-top:4px}
+  .btn{min-width:0;width:100%}
+  .bar-in{padding:10px 16px;gap:12px}
+  .bar .btn{min-width:0;width:auto;flex:none;padding:0 18px;height:48px;font-size:14px;letter-spacing:.06em}
+  .done{padding:36px 20px}
+}
+</style>
+</head>
+<body>
+<header class="hdr"><div class="hdr-in">
+  <a href="KeiriZaimu_embedded_7.html" aria-label="求人一覧へ"><img src="data:image/png;base64,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" alt="MS Agent by MS-Japan"></a>
+  <div class="sp"></div>
+  <a class="back" href="KeiriZaimu_embedded_7.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B08F52" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span class="pc-only">求人一覧に</span>もどる</a>
+</div></header>
+
+<nav class="steps" aria-label="お申し込みの手順"><ol>
+  <li id="st1" class="on"><span class="dot">1</span>入力</li>
+  <li id="st2"><span class="dot">2</span>確認</li>
+  <li id="st3"><span class="dot">3</span>完了</li>
+</ol></nav>
+
+<div class="page">
+  <div class="lead" id="lead">
+    <span class="eyebrow">CONSULTATION</span>
+    <h1>この求人について相談する</h1>
+    <p>キャリアアドバイザーが、求人の詳しい内容や企業名をご案内します。ご相談は無料です。</p>
+    <div class="meta">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B08F52" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>入力は約1分</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B08F52" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>ご入力内容は、ご紹介のためだけに使います</span>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- STEP 1: input -->
+    <form id="form" novalidate autocomplete="on">
+      <div style="display:flex;flex-direction:column;gap:24px">
+      <section class="card" id="sec1">
+        <div class="card-h"><span class="n">01</span><h2>お名前とご連絡先</h2><span class="sub">ご連絡にのみ使います</span></div>
+        <div class="card-b">
+          <div class="field" data-req="name">
+            <div class="lbl">お名前<span class="req">必須</span><span class="ok">✓ 入力済み</span></div>
+            <div class="row2">
+              <label class="in"><small>姓</small><input type="text" name="sei" autocomplete="family-name" placeholder="例）山田"></label>
+              <label class="in"><small>名</small><input type="text" name="mei" autocomplete="given-name" placeholder="例）太郎"></label>
+            </div>
+            <div class="msg">姓と名を入力してください</div>
+          </div>
+          <div class="field" data-req="kana">
+            <div class="lbl">フリガナ<span class="req">必須</span><span class="ok">✓ 入力済み</span></div>
+            <div class="row2">
+              <label class="in"><small>セイ</small><input type="text" name="seiK" placeholder="例）ヤマダ"></label>
+              <label class="in"><small>メイ</small><input type="text" name="meiK" placeholder="例）タロウ"></label>
+            </div>
+            <p class="hint">ひらがなで入力しても、カタカナに直します</p>
+            <div class="msg">カタカナで入力してください</div>
+          </div>
+          <div class="field" data-req="email">
+            <label class="lbl" for="email">メールアドレス<span class="req">必須</span><span class="ok">✓ 入力済み</span></label>
+            <input id="email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="例）taro.yamada@example.com">
+            <div class="msg">メールアドレスの形をご確認ください</div>
+          </div>
+          <div class="field" data-req="tel">
+            <label class="lbl" for="tel">電話番号<span class="req">必須</span><span class="ok">✓ 入力済み</span></label>
+            <input id="tel" type="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="例）09012345678">
+            <p class="hint">ハイフンはあってもなくても大丈夫です。日中つながりやすい番号をご入力ください</p>
+            <div class="msg">10桁か11桁の番号を入力してください</div>
+          </div>
+          <div class="field" data-req="birth">
+            <div class="lbl">生まれ年とお住まい<span class="req">必須</span><span class="ok">✓ 入力済み</span></div>
+            <div class="row2 sel2">
+              <label class="in"><small>生まれ年</small><select name="birth" required><option value="" disabled selected>選択してください</option></select></label>
+              <label class="in"><small>お住まいの都道府県</small><select name="pref" required autocomplete="address-level1"><option value="" disabled selected>選択してください</option></select></label>
+            </div>
+            <div class="msg">生まれ年とお住まいを選んでください</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec2">
+        <div class="card-h"><span class="n">02</span><h2>今のご状況</h2><span class="sub">選ぶだけで入力できます</span></div>
+        <div class="card-b">
+          <div class="field" data-req="status">
+            <div class="lbl">今の就業状況<span class="req">必須</span><span class="ok">✓ 選択済み</span></div>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="status" value="在職中"><span>在職中</span></label>
+              <label class="chip"><input type="radio" name="status" value="離職中"><span>離職中</span></label>
+              <label class="chip"><input type="radio" name="status" value="在学中"><span>在学中</span></label>
+            </div>
+            <div class="msg">1つ選んでください</div>
+          </div>
+          <div class="field" data-req="timing">
+            <div class="lbl">転職を考えている時期<span class="req">必須</span><span class="ok">✓ 選択済み</span></div>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="timing" value="すぐにでも"><span>すぐにでも</span></label>
+              <label class="chip"><input type="radio" name="timing" value="3か月以内"><span>3か月以内</span></label>
+              <label class="chip"><input type="radio" name="timing" value="半年以内"><span>半年以内</span></label>
+              <label class="chip"><input type="radio" name="timing" value="良い求人があれば"><span>良い求人があれば</span></label>
+            </div>
+            <div class="msg">1つ選んでください</div>
+          </div>
+          <div class="field">
+            <div class="lbl">経験のある職種<span class="opt">任意</span></div>
+            <p class="hint">いくつでも選べます</p>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="job" value="経理"><span>経理</span></label>
+              <label class="chip"><input type="checkbox" name="job" value="財務"><span>財務</span></label>
+              <label class="chip"><input type="checkbox" name="job" value="会計事務所・税理士法人"><span>会計事務所・税理士法人</span></label>
+              <label class="chip"><input type="checkbox" name="job" value="監査法人"><span>監査法人</span></label>
+              <label class="chip"><input type="checkbox" name="job" value="人事・総務"><span>人事・総務</span></label>
+              <label class="chip"><input type="checkbox" name="job" value="その他"><span>その他</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="lbl">お持ちの資格<span class="opt">任意</span></div>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="lic" value="日商簿記2級"><span>日商簿記2級</span></label>
+              <label class="chip"><input type="checkbox" name="lic" value="日商簿記1級"><span>日商簿記1級</span></label>
+              <label class="chip"><input type="checkbox" name="lic" value="税理士（科目合格を含む）"><span>税理士（科目合格を含む）</span></label>
+              <label class="chip"><input type="checkbox" name="lic" value="公認会計士"><span>公認会計士</span></label>
+              <label class="chip"><input type="checkbox" name="lic" value="USCPA"><span>USCPA</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label class="lbl" for="income">今の年収<span class="opt">任意</span></label>
+            <select id="income" name="income"><option value="" selected>選択してください</option></select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec3">
+        <div class="card-h"><span class="n">03</span><h2>ご相談の内容</h2><span class="sub">あとからでも伝えられます</span></div>
+        <div class="card-b">
+          <div class="field">
+            <div class="lbl">ご希望の相談方法<span class="opt">任意</span></div>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="how" value="電話"><span>電話</span></label>
+              <label class="chip"><input type="radio" name="how" value="オンライン面談"><span>オンライン面談</span></label>
+              <label class="chip"><input type="radio" name="how" value="来社して面談"><span>来社して面談</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label class="lbl" for="note">聞きたいこと・ご希望<span class="opt">任意</span></label>
+            <textarea id="note" name="note" maxlength="1000" placeholder="例）企業名と残業時間を知りたいです。平日は18時以降だと電話に出られます。"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <div class="agree">
+        <label><input type="checkbox" name="agree" id="agree"><span><a href="#">個人情報の取り扱い</a>に同意する</span></label>
+        <p>同意いただくと、内容の確認に進めます</p>
+      </div>
+      </div>
+    </form>
+
+    <!-- STEP 2: confirm -->
+    <section id="confirm" hidden style="display:flex;flex-direction:column;gap:24px">
+      <div class="card cf"><div class="card-h"><span class="n">01</span><h2>お名前とご連絡先</h2><button class="edit" type="button" data-edit="sec1">修正する</button></div><div class="card-b"><dl id="cf1"></dl></div></div>
+      <div class="card cf"><div class="card-h"><span class="n">02</span><h2>今のご状況</h2><button class="edit" type="button" data-edit="sec2">修正する</button></div><div class="card-b"><dl id="cf2"></dl></div></div>
+      <div class="card cf"><div class="card-h"><span class="n">03</span><h2>ご相談の内容</h2><button class="edit" type="button" data-edit="sec3">修正する</button></div><div class="card-b"><dl id="cf3"></dl></div></div>
+    </section>
+
+    <!-- STEP 3: done -->
+    <section id="done" hidden>
+      <div class="done">
+        <div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#C9AE74" stroke-width="2.2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <span class="eyebrow">THANK YOU</span>
+        <h2>ご相談を受け付けました</h2>
+        <p><span id="doneName"></span>様、お申し込みありがとうございます。<br>確認のメールを <b id="doneMail"></b> にお送りしました。</p>
+        <div class="flow">
+          <h2>このあとの流れ</h2>
+          <ol>
+            <li><i>1</i><span><b>アドバイザーからご連絡</b>2営業日以内に、お電話かメールでご連絡します。</span></li>
+            <li><i>2</i><span><b>面談（30分〜1時間）</b>求人の詳しい内容と企業名をお伝えし、ご経験やご希望を伺います。</span></li>
+            <li><i>3</i><span><b>応募・選考</b>応募書類の添削や面接の日程調整も、アドバイザーがお手伝いします。</span></li>
+          </ol>
+        </div>
+        <div class="btns" style="margin-top:8px"><a class="btn btn-line" href="KeiriZaimu_embedded_7.html">求人一覧にもどる</a></div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="side" id="side">
+    <div class="job">
+      <div class="job-h"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9AE74" stroke-width="2" aria-hidden="true"><rect x="3" y="7" width="18" height="13"/><path d="M8 7V4h8v3"/></svg>ご相談する求人</div>
+      <div class="job-b">
+        <div class="tags"><span class="tag" id="jKind">社名非公開求人</span><span class="no">No. <span id="jNo">240078</span></span></div>
+        <p class="job-t" id="jTitle">京都市内・駅近・業績安定の上場不動産管理会社での経理スタッフ求人！！</p>
+        <div class="job-f">
+          <span><b>想定年収</b><span class="num" id="jSal">600万円 ～ 900万円</span></span>
+          <span><b>勤務地</b><span id="jLoc">京都府</span></span>
+        </div>
+        <p class="job-note" id="jNote">企業名は、アドバイザーからお伝えします。</p>
+      </div>
+    </div>
+    <div class="flow side-flow">
+      <h2>ご相談のあとの流れ</h2>
+      <ol>
+        <li><i>1</i><span><b>アドバイザーからご連絡</b>2営業日以内にご連絡します</span></li>
+        <li><i>2</i><span><b>面談</b>企業名や詳しい内容をお伝えします</span></li>
+        <li><i>3</i><span><b>応募・選考</b>書類や面接もお手伝いします</span></li>
+      </ol>
+    </div>
+  </aside>
+  <p class="demo">※提案用の見本です。入力した内容はどこにも送られません。</p>
+</div>
+
+<div class="bar" id="bar"><div class="bar-in">
+  <div class="prog" id="prog">
+    <span class="prog-t" id="progT">必須項目 あと<b id="left">8</b>つ</span>
+    <span class="prog-bar"><i id="progI"></i></span>
+  </div>
+  <button type="button" class="btn btn-gold" id="next" aria-disabled="true">入力内容を確認する<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button type="button" class="btn btn-line" id="backBtn" hidden>修正する</button>
+  <button type="button" class="btn btn-navy" id="send" hidden>この内容で相談する</button>
+</div></div>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const form=$('#form');
+
+  // job info from the clicked card
+  const q=new URLSearchParams(location.search);
+  if(q.get('no')){
+    $('#jNo').textContent=q.get('no');
+    $('#jTitle').textContent=q.get('t')||'';
+    $('#jSal').textContent=q.get('s')||'';
+    $('#jLoc').textContent=q.get('l')||'';
+    const k=q.get('k')||'社名非公開求人';
+    $('#jKind').textContent=k;
+    if(k==='公開求人'){$('#jKind').classList.add('pub');$('#jNote').textContent='求人の詳しい内容や選考の進め方を、アドバイザーがご案内します。';}
+  }
+
+  // select options
+  const by=$('select[name=birth]'), now=new Date().getFullYear();
+  for(let y=now-20;y>=now-70;y--){const o=new Option(y+'年',y);by.add(o)}
+  by.value='';
+  const prefs='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県 海外'.split(' ');
+  const pf=$('select[name=pref]'); prefs.forEach(p=>pf.add(new Option(p,p)));
+  const inc=$('#income'); ['300万円未満','300〜400万円','400〜500万円','500〜600万円','600〜700万円','700〜800万円','800〜1,000万円','1,000万円以上'].forEach(v=>inc.add(new Option(v,v)));
+
+  // helpers
+  const val=n=>{const e=form.elements[n]; if(!e) return ''; if(e instanceof RadioNodeList){ if(e[0]&&e[0].type==='checkbox') return [...e].filter(x=>x.checked).map(x=>x.value).join('、'); return e.value;} return e.type==='checkbox'?e.checked:e.value.trim();};
+  const toKata=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60)).replace(/\s+/g,'');
+  const half=s=>s.replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/[－ー―‐-]/g,'');
+
+  const rules={
+    name:()=>val('sei')&&val('mei'),
+    kana:()=>/^[ァ-ヶー]+$/.test(val('seiK'))&&/^[ァ-ヶー]+$/.test(val('meiK')),
+    email:()=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('email')),
+    tel:()=>/^0\d{9,10}$/.test(half(val('tel'))),
+    birth:()=>val('birth')&&val('pref'),
+    status:()=>!!val('status'),
+    timing:()=>!!val('timing'),
+  };
+  const keys=Object.keys(rules), total=keys.length+1;
+  const touched=new Set();
+
+  function check(k){
+    const f=$(`.field[data-req="${k}"]`), ok=!!rules[k]();
+    f.classList.toggle('valid',ok);
+    f.classList.toggle('err',!ok&&touched.has(k));
+    return ok;
+  }
+  function update(){
+    let n=keys.filter(check).length + ($('#agree').checked?1:0);
+    const left=total-n;
+    $('#progT').innerHTML=left? '必須項目 あと<b id="left">'+left+'</b>つ' : '<span style="color:var(--ok);font-weight:700">✓ 入力完了</span>';
+    $('#progI').style.width=(n/total*100)+'%';
+    $('#next').setAttribute('aria-disabled',left?'true':'false');
+    return left===0;
+  }
+  const fieldKey=el=>{const f=el.closest('.field[data-req]');return f&&f.dataset.req};
+
+  form.addEventListener('input',e=>{
+    const k=fieldKey(e.target);
+    if(k&&(e.target.type==='radio'||e.target.tagName==='SELECT')) touched.add(k);
+    update();
+  });
+  form.addEventListener('change',update);
+  form.addEventListener('focusout',e=>{
+    const t=e.target;
+    if(t.name==='seiK'||t.name==='meiK') t.value=toKata(t.value);
+    if(t.name==='tel') t.value=half(t.value).replace(/\s/g,'');
+    if(t.name==='email') t.value=t.value.trim().replace(/[＠]/g,'@');
+    const k=fieldKey(t);
+    if(!k) return;
+    // for two-input fields, only flag once both were visited or left
+    const f=t.closest('.field'); const ins=[...f.querySelectorAll('input[type=text],select')];
+    if(ins.length<2 || ins.every(i=>i.value) || !f.contains(e.relatedTarget)) touched.add(k);
+    update();
+  });
+
+  // steps
+  function setStep(n){
+    ['st1','st2','st3'].forEach((id,i)=>{const li=$('#'+id);li.className=i+1===n?'on':(i+1<n?'done':'');});
+    form.hidden=n!==1; $('#confirm').hidden=n!==2; $('#done').hidden=n!==3;
+    $('#prog').style.visibility=n===1?'visible':'hidden';
+    $('#next').hidden=n!==1; $('#backBtn').hidden=n!==2; $('#send').hidden=n!==2;
+    $('#bar').hidden=n===3;
+    $('#lead h1').textContent=n===1?'この求人について相談する':n===2?'入力内容のご確認':'お申し込み完了';
+    $('#lead p').textContent=n===1?'キャリアアドバイザーが、求人の詳しい内容や企業名をご案内します。ご相談は無料です。':n===2?'内容をご確認のうえ、「この内容で相談する」を押してください。':'';
+    $('#lead .meta').hidden=n!==1;
+    $('#side').hidden=n===3;
+    scrollTo({top:0,behavior:'instant'});
+  }
+
+  $('#next').addEventListener('click',()=>{
+    if(!update()){
+      keys.forEach(k=>touched.add(k)); update();
+      const first=$('.field.err')||(!$('#agree').checked&&$('.agree'));
+      if(first){first.scrollIntoView({behavior:'smooth',block:'center'}); const i=first.querySelector('input,select'); if(i) setTimeout(()=>i.focus({preventScroll:true}),350);}
+      if(!$('#agree').checked && !$('.field.err')) $('.agree').animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:300});
+      return;
+    }
+    const dl=(id,rows)=>{$(id).innerHTML=rows.map(([k,v])=>`<dt>${k}</dt><dd class="${v?'':'none'}">${v?esc(v):'未入力'}</dd>`).join('')};
+    dl('#cf1',[['お名前',val('sei')+' '+val('mei')+'（'+val('seiK')+' '+val('meiK')+'）'],['メールアドレス',val('email')],['電話番号',val('tel')],['生まれ年',val('birth')+'年'],['お住まい',val('pref')]]);
+    dl('#cf2',[['今の就業状況',val('status')],['転職を考えている時期',val('timing')],['経験のある職種',val('job')],['お持ちの資格',val('lic')],['今の年収',val('income')]]);
+    dl('#cf3',[['ご希望の相談方法',val('how')],['聞きたいこと・ご希望',val('note')]]);
+    setStep(2);
+  });
+  $('#backBtn').addEventListener('click',()=>setStep(1));
+  $$('[data-edit]').forEach(b=>b.addEventListener('click',()=>{setStep(1);$('#'+b.dataset.edit).scrollIntoView({block:'start'});}));
+  $('#send').addEventListener('click',()=>{
+    $('#doneName').textContent=val('sei')+' '+val('mei'); $('#doneMail').textContent=val('email');
+    setStep(3);
+  });
+  function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  update();
+})();
+</script>
+</body>
+</html>
